@@ -1,0 +1,379 @@
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Share Tech Mono', monospace;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  #game-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #title-bar {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: #fff;
+    text-shadow: 0 0 20px #fff4, 0 0 40px #7fffd444;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  #game-canvas {
+    display: block;
+    border: 2px solid #333;
+    box-shadow: 0 0 40px #0005, inset 0 0 80px #0008;
+    cursor: crosshair;
+    background: #0d0d1a;
+  }
+
+  #hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 6px 12px;
+    background: #111120;
+    border: 1px solid #222;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hud-block { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .hud-label { color: #555; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; }
+  .hud-val { color: #eee; font-size: 0.85rem; font-family: 'Orbitron', sans-serif; }
+
+  #hearts-display { display: flex; gap: 4px; font-size: 1rem; }
+
+  /* Overlays */
+  .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10,10,20,0.93);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    z-index: 100;
+  }
+
+  .overlay h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-shadow: 0 0 30px currentColor;
+  }
+
+  .overlay h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: #aaa;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    font-size: 0.8rem;
+    color: #ccc;
+  }
+
+  .stat-row { display: flex; justify-content: space-between; gap: 16px; }
+  .stat-key { color: #666; }
+  .stat-val { color: #fff; font-family: 'Orbitron', sans-serif; }
+
+  .btn {
+    padding: 10px 32px;
+    background: transparent;
+    border: 2px solid #fff3;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  .btn:hover { background: #ffffff18; border-color: #fff8; box-shadow: 0 0 20px #fff2; }
+
+  .color-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+
+  #level-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+  }
+
+  /* ── LEVEL MAP ── */
+  #level-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    padding: 0 24px;
+  }
+
+  .map-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* alternating L→R / R→L zigzag */
+  .map-row.reverse { flex-direction: row-reverse; }
+
+  .map-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: default;
+    width: 72px;
+  }
+
+  .map-node.unlocked { cursor: pointer; }
+
+  .map-node-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-node.locked .map-node-circle {
+    background: #141420;
+    color: #333;
+    border-color: #222;
+  }
+
+  .map-node.unlocked .map-node-circle {
+    background: #1a1a30;
+    color: #888;
+    border-color: #444;
+  }
+
+  .map-node.unlocked:hover .map-node-circle {
+    transform: scale(1.1);
+    box-shadow: 0 0 18px #fff3;
+    border-color: #aaa;
+    color: #fff;
+  }
+
+  .map-node.cleared .map-node-circle {
+    background: #0d1f14;
+    border-color: #2ecc71;
+    color: #2ecc71;
+    box-shadow: 0 0 12px #2ecc7144;
+  }
+
+  .map-node.cleared:hover .map-node-circle {
+    transform: scale(1.1);
+    box-shadow: 0 0 22px #2ecc7166;
+  }
+
+  .map-node.current-best .map-node-circle {
+    background: #1a1200;
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 14px #ffd70055;
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gold {
+    0%,100% { box-shadow: 0 0 10px #ffd70044; }
+    50%      { box-shadow: 0 0 24px #ffd700aa; }
+  }
+
+  .map-node-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: #444;
+    text-align: center;
+    max-width: 68px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .map-node.unlocked .map-node-label,
+  .map-node.cleared .map-node-label { color: #666; }
+  .map-node.current-best .map-node-label { color: #ffd70099; }
+
+  .map-node-star {
+    position: absolute;
+    top: -2px; right: -2px;
+    font-size: 0.65rem;
+    line-height: 1;
+  }
+
+  /* Connector paths between nodes */
+  .map-connector {
+    flex: 1;
+    height: 2px;
+    background: #222;
+    min-width: 18px;
+    max-width: 44px;
+    margin: 0 2px;
+    position: relative;
+    top: -12px; /* align with circle center */
+    border-radius: 1px;
+  }
+
+  .map-connector.active { background: #2ecc7166; }
+
+  /* Vertical connector between rows */
+  .map-vert-connector {
+    width: 2px;
+    height: 22px;
+    background: #222;
+    border-radius: 1px;
+  }
+  .map-vert-connector.active { background: #2ecc7166; }
+
+  /* Best score badge */
+  .map-score-badge {
+    position: absolute;
+    bottom: -2px; left: 50%;
+    transform: translateX(-50%);
+    background: #0008;
+    font-size: 0.45rem;
+    color: #2ecc71;
+    padding: 1px 4px;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-family: 'Share Tech Mono', monospace;
+    pointer-events: none;
+  }
+
+  .map-lock-icon { font-size: 1rem; opacity: 0.3; }
+
+  /* ── TUTORIAL ── */
+  .tut-section {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 14px;
+    padding: 0 8px;
+  }
+
+  .tut-heading {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #00e5ff;
+    border-bottom: 1px solid #00e5ff22;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .tut-heading:hover {
+    color: #fff;
+    border-color: #00e5ff;
+    text-shadow: 0 0 10px #00e5ff;
+  }
+  .tut-toggle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: #888;
+    transition: color 0.2s;
+  }
+  .tut-heading:hover .tut-toggle {
+    color: #fff;
+  }
+
+  .tut-body {
+    font-size: 0.72rem;
+    color: #888;
+    line-height: 1.75;
+    text-align: center;
+  }
+
+  .tut-controls { display: flex; flex-direction: column; gap: 6px; }
+
+  .tut-key-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tut-keys {
+    min-width: 120px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  .tut-desc {
+    font-size: 0.7rem;
+    color: #777;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  kbd {
+    display: inline-block;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-bottom: 2px solid #444;
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: #ccc;
+    white-space: nowrap;
+  }
+
+  .map-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: #555;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .map-legend {
+    display: flex;
+    gap: 16px;
+    font-size: 0.6rem;
+    color: #444;
+    margin-top: 2px;
+  }
+
+  .map-legend span { display: flex; align-items: center; gap: 5px; }
+  .legend-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    border: 1.5px solid currentColor;
+  }

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/games/job-hunt-hero/">
+  <title>JOB HUNT HERO</title>
+
+  <!-- Global site fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Game specific CSS -->
+  <link rel="stylesheet" href="css/job-hunt-hero.css">
+
+  <style>
+    /* --- Global Site Styles (Adapted from index.html for consistency) --- */
+    :root {
+      --bg: #020a0f;
+      --cyan: #00f5ff;
+      --cyan2: #00bcd4;
+      --green: #00ff88;
+      --white: #e8f4f8;
+      --dim: #4a7a8a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Override the color-shooter.css body rules to allow scrolling and normal layout */
+    body {
+      background: var(--bg) !important;
+      color: var(--white) !important;
+      font-family: 'Rajdhani', sans-serif !important;
+      display: block !important;
+      align-items: initial !important;
+      justify-content: initial !important;
+      min-height: 100vh;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      cursor: none;
+    }
+
+    /* SCANLINES & GRID */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, background 0.2s;
+      mix-blend-mode: screen;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+      opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: linear-gradient(to bottom, rgba(2, 10, 15, 0.95), transparent);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--dim);
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+      cursor: none;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cyan);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 30px 10vw;
+      border-top: 1px solid rgba(0, 245, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      margin-top: 60px;
+      background: rgba(2, 10, 15, 0.6);
+    }
+
+    .footer-copy {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(74, 122, 138, 0.4);
+      letter-spacing: 2px;
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: rgba(0, 245, 255, 0.2);
+      letter-spacing: 4px;
+    }
+
+    /* GAME CONTAINER WRAPPER */
+    .game-wrapper-section {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      padding-top: 75px;
+      /* Reduced to eliminate scroll overflow */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .game-header {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .game-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      color: var(--white);
+      text-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+      letter-spacing: 4px;
+    }
+
+    .game-desc {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--cyan);
+      font-size: 0.8rem;
+      margin-top: 2px;
+      letter-spacing: 1px;
+    }
+
+    /* DEV INFO PANEL LAYOUT */
+    .game-content-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .side-panel {
+      background: rgba(0, 245, 255, 0.02);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      padding: 24px;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.4s ease;
+      cursor: none;
+    }
+
+    .side-panel:hover {
+      background: rgba(0, 245, 255, 0.05);
+      border-color: rgba(0, 245, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+      transform: translateY(-4px);
+    }
+
+    /* MORE GAMES TILES */
+    .more-game-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      background: rgba(0, 255, 136, 0.02);
+      transition: all 0.3s;
+      cursor: none;
+      text-decoration: none;
+    }
+
+    .more-game-card:hover {
+      border-color: rgba(0, 255, 136, 0.4);
+      background: rgba(0, 255, 136, 0.05);
+      transform: translateX(4px);
+    }
+
+    .more-game-card.coming-soon {
+      opacity: 0.5;
+      border-style: dashed;
+      pointer-events: none;
+    }
+
+    .mg-banner-current {
+      width: 64px;
+      height: 96px;
+      border: 1px solid var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .mg-banner {
+      width: 32px;
+      height: 32x;
+      border: 1px solid var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .mg-plus {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: rgba(0, 255, 136, 0.4);
+      border: 1px dashed rgba(0, 255, 136, 0.2);
+      flex-shrink: 0;
+    }
+
+    .mg-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .mg-title {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .mg-status {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .mg-game-description {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .mg-status.active {
+      color: var(--cyan);
+      text-shadow: 0 0 5px var(--cyan);
+    }
+
+    .dev-title {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--cyan);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+    }
+
+    .dev-desc {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(232, 244, 248, 0.6);
+      line-height: 1.6;
+    }
+
+    .dev-subtitle {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    .dev-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .dev-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      padding: 4px 10px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 1200px) {
+      .game-content-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .side-panel {
+        width: 100%;
+        max-width: 520px;
+      }
+    }
+
+    /* Small tweaks for game UI inside the new wrapper */
+    #title-bar {
+      display: none !important;
+    }
+
+    /* Hide the old title bar inside the box, we have a nicer one outside */
+    #game-wrapper {
+      cursor: auto;
+      transform-origin: top center;
+    }
+
+    /* Reveal standard system mouse when inside the game component */
+
+    /* Dynamically scale the ENTIRE game unit proportionally on smaller screens so the menus scale with it */
+    @media (max-height: 900px) {
+      #game-wrapper {
+        zoom: 0.85;
+      }
+    }
+
+    @media (max-height: 750px) {
+      #game-wrapper {
+        zoom: 0.7;
+      }
+    }
+
+    @media (max-height: 600px) {
+      #game-wrapper {
+        zoom: 0.55;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background grid -->
+  <div class="grid-bg"></div>
+
+  <!-- Custom cursors -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">SE</div>
+    <ul class="nav-links">
+      <li><a href="../../index.html#about">About</a></li>
+      <li><a href="../../index.html#projects">Projects</a></li>
+      <li><a href="../../index.html#games" class="active">Games</a></li>
+      <li><a href="../../index.html#skills">Skills</a></li>
+      <li><a href="../../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- GAME SECTION -->
+  <section class="game-wrapper-section">
+    <div class="game-header">
+      <h1 class="game-title">JOB HUNT HERO</h1>
+      <p class="game-desc">// MATCH COLORS . SURVIVE . CONQUER //</p>
+    </div>
+
+    <div class="game-content-row">
+      <!-- More Games Panel (Left) -->
+      <div class="side-panel left-panel">
+        <div class="dev-title" style="margin-bottom: 4px;">// ARCADE GAMES</div>
+
+        <a href="index.html" class="more-game-card">
+          <div class="mg-banner-current" style="background: url('assets/game-banner.png') center/cover;"></div>
+          <div class="mg-info">
+            <div class="mg-title">JOB HUNT HERO</div>
+            <div class="mg-status active">PLAYING NOW</div>
+            <div class="mg-game-description">Help Sagi get hired! Shoot and match his CV to the right job applications
+              before they overwhelm you.</div>
+          </div>
+        </a>
+
+        <div class="more-game-card coming-soon">
+          <div class="mg-plus">+</div>
+          <div class="mg-info">
+            <div class="mg-title">LOCKED SLOT</div>
+            <div class="mg-status">COMING SOON</div>
+          </div>
+        </div>
+
+        <div class="more-game-card coming-soon">
+          <div class="mg-plus">+</div>
+          <div class="mg-info">
+            <div class="mg-title">LOCKED SLOT</div>
+            <div class="mg-status">COMING SOON</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Original Game DOM -->
+      <div id="game-wrapper">
+        <div id="title-bar">◈ CHROMATIC BLITZ ◈</div>
+        <canvas id="game-canvas" width="520" height="580"></canvas>
+        <div id="hud">
+          <div class="hud-block">
+            <span class="hud-label">Level</span>
+            <span class="hud-val" id="hud-level">1</span>
+          </div>
+          <div class="hud-block">
+            <span class="hud-label">Score</span>
+            <span class="hud-val" id="hud-score">0</span>
+          </div>
+          <div class="hud-block">
+            <span class="hud-label">Lives</span>
+            <div id="hearts-display">❤️❤️❤️</div>
+          </div>
+          <div class="hud-block">
+            <span class="hud-label">Mismatches</span>
+            <span class="hud-val" id="hud-mismatches">0</span>
+          </div>
+          <div class="hud-block">
+            <span class="hud-label">Time</span>
+            <span class="hud-val" id="hud-time">0s</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Development Logic Panel -->
+      <div class="side-panel right-panel" id="dev-info-panel">
+        <div class="dev-title">// DEVELOPMENT LOG</div>
+        <p class="dev-desc">This modular HTML5 Canvas arcade experience was built efficiently using a blend of
+          foundational game dev principles and cutting-edge execution tools.</p>
+
+        <div class="dev-subtitle">Tech Stack</div>
+        <div class="dev-tags">
+          <span class="dev-tag">JavaScript / ES6</span>
+          <span class="dev-tag">HTML5 Canvas</span>
+          <span class="dev-tag">Claude Code</span>
+          <span class="dev-tag">GPT Image</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">© 2025 SAGI EVRONI — ALL SYSTEMS OPERATIONAL</div>
+    <div class="footer-logo">SE_v1.0</div>
+  </footer>
+
+  <script>
+    // CURSOR LOGIC (From index.html)
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+
+    // Hide custom cursor over game canvas area to not interfere with game crosshair
+    const gameWrapper = document.getElementById('game-wrapper');
+    gameWrapper.addEventListener('mouseenter', () => {
+      cursor.style.display = 'none';
+      ring.style.display = 'none';
+    });
+    gameWrapper.addEventListener('mouseleave', () => {
+      cursor.style.display = 'block';
+      ring.style.display = 'block';
+    });
+  </script>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
