@@ -2,6 +2,7 @@ import { W, H, FLOOR_Y, CHAR_SIZE, BULLET_SPEED, BOUNCE_LIMIT, COLORS, LEVELS } 
 import { state } from './state.js';
 import { randInt, saveProgress } from './utils.js';
 import { updateHUD, hideAllOverlays, showResultOverlay } from './ui.js';
+import { playShoot, playHit, playMiss, playWall, playGameplayMusic } from './audio.js';
 
 export function cycleColor(dir = 1) {
   state.currentColorIdx = (state.currentColorIdx + dir + COLORS.length) % COLORS.length;
@@ -55,6 +56,7 @@ export function shoot() {
     bounces: 0,
     trail: [],
   });
+  playShoot();
 }
 
 export function spawnParticles(x, y, color, count, big) {
@@ -84,11 +86,13 @@ export function checkCollisions() {
         if (match) {
           state.stats.correct[r.colorId]++;
           spawnParticles(r.x + r.w / 2, r.y + r.h / 2, COLORS[r.colorId].hex, 14, true);
+          playHit();
         } else {
           state.mismatches++;
           state.stats.mismatches++;
           state.hearts--;
           spawnParticles(r.x + r.w / 2, r.y + r.h / 2, '#ffffff', 6, false);
+          playMiss();
           if (state.hearts <= 0) {
             endLevel(false);
             return;
@@ -138,9 +142,11 @@ export function update(dt) {
     b.trail.push({ x: b.x, y: b.y });
     if (b.trail.length > 5) b.trail.shift();
     b.x += b.vx; b.y += b.vy;
+    const prevBounces = b.bounces;
     if (b.x < 6) { b.x = 6; b.vx = -b.vx; b.bounces++; }
     if (b.x > W - 6) { b.x = W - 6; b.vx = -b.vx; b.bounces++; }
     if (b.y < 0) { b.y = 0; b.vy = -b.vy; b.bounces++; }
+    if (b.bounces > prevBounces) playWall();
     if (b.y > H || b.bounces > BOUNCE_LIMIT) { state.bullets.splice(i, 1); }
   }
 
@@ -165,6 +171,7 @@ export function update(dt) {
 }
 
 export function startLevel(idx) {
+  playGameplayMusic();
   state.levelIdx = idx;
   const cfg = LEVELS[idx];
   state.hearts = cfg.heartsAllowed;
