@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban System — Sagi Evroni</title>
+  <link rel="stylesheet" href="../_shared/project.css">
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+
+  <nav>
+    <a href="../../index.html" class="nav-logo">SE</a>
+    <a href="../../index.html#projects" class="back-link">Back to Portfolio</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="proj-num">// PROJECT_04</div>
+    <h1 class="proj-title">Kanban System</h1>
+    <p class="proj-tagline">// Task management app · N-tier architecture · Team collaboration</p>
+
+    <!-- MEDIA -->
+    <div class="proj-media" style="width: 50%;">
+      <img src="kanban.gif" alt="Kanban System">
+    </div>
+
+    <!-- META BAR -->
+    <div class="proj-meta">
+      <a href="https://github.com/SagiEv/Kanban-Software-Project" class="github-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+        </svg>
+        View on GitHub
+      </a>
+      <div class="stack-pills">
+        <span class="stack-pill">C#</span>
+        <span class="stack-pill">.NET</span>
+        <span class="stack-pill">N-Tier Architecture</span>
+        <span class="stack-pill">SQLite</span>
+        <span class="stack-pill">GitHub Workflows</span>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Overview</div>
+      <p>Full-stack task management application built with a strict n-tier architecture — presentation, business logic,
+        and data access layers are fully separated with no cross-layer dependencies.</p>
+      <p>Developed collaboratively using structured GitHub workflows with PR reviews, branch protection rules, and issue
+        tracking — simulating a professional engineering team process.</p>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Key Features</div>
+      <ul class="feature-list">
+        <li>Kanban board with column-based task lifecycle (Backlog → In Progress → Done)</li>
+        <li>Board, column, and task CRUD with validation at the business logic layer</li>
+        <li>Clean n-tier separation enforced at the assembly level</li>
+        <li>SQLite persistence via a dedicated data access layer with repository pattern</li>
+        <li>Team PR review process with protected main branch and CI checks</li>
+      </ul>
+    </div>
+
+    <!-- CHALLENGES & SOLUTIONS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Challenges & Solutions</div>
+      <div class="challenge-pair">
+        <div class="challenge-problem">
+          <div class="challenge-label">CHALLENGE</div>
+          Enforcing strict n-tier boundaries — early versions had UI code reaching directly into data layer
+        </div>
+        <div class="challenge-solution">
+          <div class="challenge-label">SOLUTION</div>
+          Refactored into separate C# projects (assemblies) — compiler enforces layer boundaries via project references
+        </div>
+      </div>
+      <div class="challenge-pair">
+        <div class="challenge-problem">
+          <div class="challenge-label">CHALLENGE</div>
+          Coordinating concurrent feature development across team members without breaking main
+        </div>
+        <div class="challenge-solution">
+          <div class="challenge-label">SOLUTION</div>
+          Adopted feature-branch Git workflow with required PR reviews and automated build checks before merge
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE DIAGRAM -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Architecture</div>
+      <iframe src="design.pdf" width="100%" height="500px">
+      </iframe>
+    </div>
+
+    <!-- ROLE & TEAM -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Role & Team</div>
+      <div class="role-grid">
+        <div class="role-cell">
+          <div class="role-cell-label">TEAM SIZE</div>
+          <div class="role-cell-value">3 Engineers</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">MY ROLE</div>
+          <div class="role-cell-value">Backend / Architecture</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">CONTEXT</div>
+          <div class="role-cell-value">Software Engineering Course</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">YEAR</div>
+          <div class="role-cell-value">2022</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Status</div>
+      <div class="proj-status completed">Completed</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="proj-footer">
+      <a href="../show-my-grade/">← Previous Project</a>
+      <a href="../../index.html#projects">All Projects ↑</a>
+    </div>
+
+  </div>
+</body>
+
+</html>

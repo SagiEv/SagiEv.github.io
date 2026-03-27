@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Web App — Sagi Evroni</title>
+  <link rel="stylesheet" href="../_shared/project.css">
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+
+  <nav>
+    <a href="../../index.html" class="nav-logo">SE</a>
+    <a href="../../index.html#projects" class="back-link">Back to Portfolio</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="proj-num">// PROJECT_01</div>
+    <h1 class="proj-title">Market Web App</h1>
+    <p class="proj-tagline">// Full-stack e-commerce platform · End-to-end architecture</p>
+
+    <!-- MEDIA -->
+    <div class="proj-media" style="width: 50%;">
+      <img src="market.gif" alt="Market Web App">
+    </div>
+
+    <!-- META BAR -->
+    <div class="proj-meta">
+      <a href="https://github.com/edenbar23/sadna_market" class="github-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+        </svg>
+        View on GitHub
+      </a>
+      <div class="stack-pills">
+        <span class="stack-pill">React</span>
+        <span class="stack-pill">Spring Boot</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">REST API</span>
+        <span class="stack-pill">Docker</span>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Overview</div>
+      <p>Full-stack e-commerce platform built end-to-end — from a responsive React UI to scalable Spring Boot REST APIs
+        backed by a relational PostgreSQL data model.</p>
+      <p>The project focused on modular architecture for long-term maintainability, clean separation of concerns across
+        layers, and real-world team collaboration via structured GitHub workflows.</p>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Key Features</div>
+      <ul class="feature-list">
+        <li>Product catalog with filters, search, and pagination</li>
+        <li>JWT-based authentication and role-based authorization</li>
+        <li>Order lifecycle management from cart to checkout</li>
+        <li>RESTful API with full CRUD operations on all entities</li>
+        <li>Responsive UI with component-based React architecture</li>
+      </ul>
+    </div>
+
+    <!-- CHALLENGES & SOLUTIONS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Challenges & Solutions</div>
+      <div class="challenge-pair">
+        <div class="challenge-problem">
+          <div class="challenge-label">CHALLENGE</div>
+          Keeping the frontend and backend in sync as the data model evolved during development
+        </div>
+        <div class="challenge-solution">
+          <div class="challenge-label">SOLUTION</div>
+          Defined shared DTOs as the contract boundary early, versioned API changes via feature branches with PR reviews
+        </div>
+      </div>
+      <div class="challenge-pair">
+        <div class="challenge-problem">
+          <div class="challenge-label">CHALLENGE</div>
+          Handling concurrent order submissions without leaving inventory in an inconsistent state
+        </div>
+        <div class="challenge-solution">
+          <div class="challenge-label">SOLUTION</div>
+          Applied optimistic locking on inventory entities and wrapped order creation in a transactional service layer
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE DIAGRAM -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Architecture</div>
+      <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+
+        <!-- Left: architecture diagram -->
+        <div style="flex:1; min-width:200px;" class="proj-diagram">
+          <img src="architecture_diagram.png" alt="Architecture Diagram" style="width:100%;height:auto;">
+        </div>
+
+        <!-- Right: class diagram (zoomable) -->
+        <div style="flex:1; min-width:200px;" class="proj-diagram">
+          <div style="position:relative; display:inline-block; width:100%;">
+            <img src="class_diagram.jpg" alt="Class Diagram" id="class-diagram-thumb"
+              style="width:100%;height:auto;cursor:zoom-in;display:block;"
+              onclick="document.getElementById('diagram-lightbox').style.display='flex'" title="Click to enlarge">
+            <div
+              style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+              <span style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:rgba(232,244,248,0.85);
+                           letter-spacing:3px;background:rgba(2,10,15,0.55);padding:6px 14px;
+                           border:1px solid rgba(0,245,255,0.2);backdrop-filter:blur(2px);">
+                CLASS DIAGRAM
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX for class diagram -->
+    <div id="diagram-lightbox" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9000;
+             align-items:center;justify-content:center;cursor:zoom-out;padding:24px;">
+      <img src="class_diagram.jpg" alt="Class Diagram – Full Size"
+        style="max-width:95vw;max-height:92vh;object-fit:contain;box-shadow:0 0 60px rgba(0,245,255,0.2);"
+        onclick="event.stopPropagation()">
+      <div style="position:fixed;top:20px;right:28px;color:rgba(255,255,255,0.4);
+                  font-family:'Share Tech Mono',monospace;font-size:0.75rem;letter-spacing:2px;pointer-events:none;">
+        ESC / click to close
+      </div>
+    </div>
+    <script>
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') document.getElementById('diagram-lightbox').style.display = 'none';
+      });
+    </script>
+
+    <!-- ROLE & TEAM -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Role & Team</div>
+      <div class="role-grid">
+        <div class="role-cell">
+          <div class="role-cell-label">TEAM SIZE</div>
+          <div class="role-cell-value">4 Engineers</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">MY ROLE</div>
+          <div class="role-cell-value">Full-Stack</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">CONTEXT</div>
+          <div class="role-cell-value">University Course</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">YEAR</div>
+          <div class="role-cell-value">2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Status</div>
+      <div class="proj-status completed">Completed</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="proj-footer">
+      <a href="../../index.html#projects">← All Projects</a>
+      <a href="../set-game-engine/">Next Project →</a>
+    </div>
+
+  </div><!-- /.page -->
+</body>
+
+</html>

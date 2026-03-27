@@ -1,0 +1,496 @@
+/*
+  project.css — Shared stylesheet for all project detail pages
+  Matches the portfolio's design system (dark bg, Orbitron, cyan accent)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+:root {
+  --bg: #020a0f;
+  --bg2: #040e15;
+  --cyan: #00f5ff;
+  --green: #00ff88;
+  --orange: #ff6b00;
+  --red: #ff3e5e;
+  --white: #e8f4f8;
+  --dim: #4a7a8a;
+  --panel: rgba(0, 245, 255, 0.04);
+  --border: rgba(0, 245, 255, 0.15);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ── SCANLINES ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── GRID BG ── */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+
+  0%,
+  100% {
+    opacity: .5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 60px;
+  background: linear-gradient(to bottom, rgba(2, 10, 15, 0.95), transparent);
+  backdrop-filter: blur(4px);
+}
+
+.nav-logo {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px var(--cyan);
+  text-decoration: none;
+}
+
+.back-link {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--dim);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-link:hover {
+  color: var(--cyan);
+}
+
+.back-link::before {
+  content: '←';
+  font-size: 1rem;
+}
+
+/* ── PAGE WRAPPER ── */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 40px 100px;
+}
+
+/* ── HERO HEADER ── */
+.proj-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.proj-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 30%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.proj-tagline {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--dim);
+  letter-spacing: 2px;
+  margin-bottom: 48px;
+}
+
+/* ── MEDIA ── */
+.proj-media {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);
+  background: var(--panel);
+}
+
+.proj-media img,
+.proj-media video,
+.proj-media iframe {
+  width: 100%;
+  display: block;
+}
+
+.proj-media-placeholder {
+  width: 100%;
+  aspect-ratio: 16/7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--dim);
+  letter-spacing: 2px;
+  border: 1px dashed var(--border);
+}
+
+/* ── META BAR ── */
+.proj-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.github-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--dim);
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.github-link:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.15);
+}
+
+.github-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stack-pill {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  color: rgba(232, 244, 248, 0.6);
+  background: var(--panel);
+  letter-spacing: 1px;
+}
+
+/* ── SECTION BLOCK ── */
+.proj-section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.proj-section-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.proj-section h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.proj-section p {
+  font-size: 1rem;
+  color: rgba(232, 244, 248, 0.75);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.proj-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── KEY FEATURES LIST ── */
+.feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feature-list li {
+  font-size: 0.95rem;
+  color: rgba(232, 244, 248, 0.8);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.feature-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+}
+
+/* ── CHALLENGE PAIRS ── */
+.challenge-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+
+.challenge-problem,
+.challenge-solution {
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.challenge-problem {
+  background: rgba(255, 62, 94, 0.04);
+  border-right: 1px solid var(--border);
+  color: rgba(232, 244, 248, 0.65);
+}
+
+.challenge-solution {
+  background: rgba(0, 245, 255, 0.03);
+  color: rgba(232, 244, 248, 0.8);
+}
+
+.challenge-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.challenge-problem .challenge-label {
+  color: var(--red);
+}
+
+.challenge-solution .challenge-label {
+  color: var(--cyan);
+}
+
+/* ── ARCHITECTURE DIAGRAM ── */
+.proj-diagram {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 24px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.proj-diagram img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.proj-diagram-placeholder {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 2px;
+  padding: 48px;
+  border: 1px dashed rgba(0, 245, 255, 0.15);
+  text-align: center;
+  width: 100%;
+}
+
+/* ── TEAM / ROLE ── */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--border);
+}
+
+.role-cell {
+  background: var(--bg);
+  padding: 20px 24px;
+}
+
+.role-cell-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--dim);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.role-cell-value {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* ── STATUS BADGE ── */
+.proj-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  padding: 6px 16px;
+  border: 1px solid;
+  margin-top: 8px;
+}
+
+.proj-status.completed {
+  color: var(--green);
+  border-color: rgba(0, 255, 136, 0.3);
+  background: rgba(0, 255, 136, 0.04);
+}
+
+.proj-status.in-progress {
+  color: var(--orange);
+  border-color: rgba(255, 107, 0, 0.3);
+  background: rgba(255, 107, 0, 0.04);
+}
+
+.proj-status.archived {
+  color: var(--dim);
+  border-color: var(--border);
+}
+
+.proj-status::before {
+  content: '●';
+  font-size: 0.5rem;
+}
+
+/* ── FOOTER ── */
+.proj-footer {
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.proj-footer a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--dim);
+  text-decoration: none;
+  letter-spacing: 2px;
+  transition: color 0.3s;
+}
+
+.proj-footer a:hover {
+  color: var(--cyan);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyan);
+  opacity: 0.3;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav {
+    padding: 16px 24px;
+  }
+
+  .page {
+    padding: 100px 24px 80px;
+  }
+
+  .challenge-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .challenge-problem {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}

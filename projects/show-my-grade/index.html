@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShowMyGrade — Sagi Evroni</title>
+  <link rel="stylesheet" href="../_shared/project.css">
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+
+  <nav>
+    <a href="../../index.html" class="nav-logo">SE</a>
+    <a href="../../index.html#projects" class="back-link">Back to Portfolio</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="proj-num">// PROJECT_03</div>
+    <h1 class="proj-title">ShowMyGrade</h1>
+    <p class="proj-tagline">// Browser tool for BGU students · DOM parsing · Live at BGU</p>
+
+    <!-- MEDIA -->
+    <div class="proj-media">
+      <img src="smg.png" alt="ShowMyGrade">
+    </div>
+
+    <!-- META BAR -->
+    <div class="proj-meta">
+      <a href="https://github.com/SagiEv/ShowMyGrade/" class="github-link" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+        </svg>
+        View on GitHub
+      </a>
+      <div class="stack-pills">
+        <span class="stack-pill">JavaScript</span>
+        <span class="stack-pill">HTML</span>
+        <span class="stack-pill">CSS</span>
+        <span class="stack-pill">DOM API</span>
+        <span class="stack-pill">Chrome Extension</span>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Overview</div>
+      <p>A browser-based utility that automatically extracts, parses, and visualizes exam score data from the BGU
+        student portal — a page that provides no native visualization or filtering tools of its own.</p>
+      <p>Used by real BGU students. The tool runs entirely client-side with no server, parsing live DOM content and
+        rendering dynamic grade breakdowns, averages, and trend charts on demand.</p>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Key Features</div>
+      <ul class="feature-list">
+        <li>Live DOM traversal to extract structured grade data from the student portal</li>
+        <li>Dynamic chart rendering showing score distributions and averages</li>
+        <li>Zero backend — fully client-side, runs privately in the browser</li>
+        <li>Clean injected UI that overlays on the existing portal without disruption</li>
+        <li>Handles edge cases: missing grades, unusual formats, multiple semesters</li>
+      </ul>
+    </div>
+
+    <!-- CHALLENGES & SOLUTIONS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Challenges & Solutions</div>
+      <div class="challenge-pair">
+        <div class="challenge-problem">
+          <div class="challenge-label">CHALLENGE</div>
+          The portal's DOM structure is inconsistent — different course types render different HTML layouts
+        </div>
+        <div class="challenge-solution">
+          <div class="challenge-label">SOLUTION</div>
+          Built a resilient multi-strategy parser that attempts several selector paths and falls back gracefully
+        </div>
+      </div>
+      <div class="challenge-pair">
+        <div class="challenge-problem">
+          <div class="challenge-label">CHALLENGE</div>
+          Injecting a clean UI into an existing page without clashing with portal styles
+        </div>
+        <div class="challenge-solution">
+          <div class="challenge-label">SOLUTION</div>
+          Used a Shadow DOM container so all injected styles are scoped and isolated from the host page
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLE & TEAM -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Role & Team</div>
+      <div class="role-grid">
+        <div class="role-cell">
+          <div class="role-cell-label">TEAM SIZE</div>
+          <div class="role-cell-value">Solo</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">MY ROLE</div>
+          <div class="role-cell-value">Frontend / Tool Dev</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">CONTEXT</div>
+          <div class="role-cell-value">Personal Project</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">YEAR</div>
+          <div class="role-cell-value">2023</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Status</div>
+      <div class="proj-status completed">Completed · In Use</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="proj-footer">
+      <a href="../set-game-engine/">← Previous Project</a>
+      <a href="../kanban-system/">Next Project →</a>
+    </div>
+
+  </div>
+</body>
+
+</html>
