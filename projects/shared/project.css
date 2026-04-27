@@ -250,6 +250,19 @@ nav {
   margin-bottom: 24px;
 }
 
+.proj-section a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.proj-section a:visited {
+  color: #fff;
+}
+
+.proj-section a:hover {
+  text-decoration: underline; /* optional, nice UX */
+}
+
 .proj-section-label {
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.65rem;
