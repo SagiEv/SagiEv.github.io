@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rope Escape Reimagined — Sagi Evroni</title>
+  <link rel="stylesheet" href="../shared/project.css">
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <nav>
+    <div class="nav-logo">SE</div>
+    <ul class="nav-links">
+      <li><a href="../../#skills">Skills</a></li>
+      <li><a href="../../#projects">Projects</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#automation">Automation</a></li>
+      <li><a href="../../#explorations">Explorations</a></li>
+      <li><a href="../../#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="proj-num">// EXPLORE_05</div>
+    <h1 class="proj-title">Modified Android Game</h1>
+    <p class="proj-tagline">// APK Deconstruction & Thematic Transformation</p>
+
+    <div class="proj-media-grid">
+      <div class="video-item">
+        <div class="video-label">Modded</div>
+        <video src="Rope_Escape_Modded.mp4" autoplay muted loop></video>
+      </div>
+      <div class="video-item">
+        <div class="video-label">Original</div>
+        <video src="Rope_Escape_Original.mp4" autoplay muted loop></video>
+      </div>
+    </div>
+    <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
+      <div class="stack-pills">
+        <span class="stack-pill">APKTool</span>
+        <span class="stack-pill">APK Editor</span>
+        <span class="stack-pill">SignApk</span>
+        <span class="stack-pill">Android SDK</span>
+        <span class="stack-pill">Reverse Engineering</span>
+      </div>
+    </div>
+
+    <div class="proj-section">
+      <div class="proj-section-label">// Description</div>
+      <p>In 2013, I explored how Android games are structured by deconstructing the APK of the mobile game <strong><a href="https://rope-escape.en.download.it/android" target="_blank">Rope Escape</a></strong> and rebuilding it with a completely new visual identity.</p>
+      <p>Using tools like APKTool, I unpacked the application, navigated its internal resource structure, and replaced nearly all visual assets — effectively transforming the game’s theme while preserving its original mechanics.</p>
+    </div>
+
+    <div class="proj-section">
+      <div class="proj-section-label">// Modifications</div>
+      <p>• Replaced all playable characters with superhero-inspired designs (Spider-Man, Batman, Hulk, etc.)</p>
+      <p>• Transformed the environment from a jungle setting into an urban cityscape with buildings and skyline elements</p>
+      <p>• Replaced in-game coins with Israeli Shekel symbols to localize the experience</p>
+      <p>• Translated and redesigned the UI menu into Hebrew</p>
+    </div>
+
+    <div class="proj-section">
+      <div class="proj-section-label">// Technical Process</div>
+      <p>The workflow involved decompiling the APK, modifying assets across multiple resolution folders (drawable variants), and rebuilding the application. A key step was properly signing the APK to allow installation on Android devices.</p>
+
+      <p>This hands-on process revealed how tightly structured Android apps are, and how visual layers can be swapped independently from gameplay logic.</p>
+    </div>
+
+    <div class="proj-section">
+      <div class="proj-section-label">// What I Learned</div>
+      <p>• Deep understanding of Android APK structure (resources, manifests, compiled assets)</p>
+      <p>• Practical experience with asset pipelines and multi-resolution support</p>
+      <p>• APK rebuilding, signing, and deployment process</p>
+      <p>• How far visual transformation can go without touching core game logic</p>
+    </div>
+
+    <div class="proj-footer">
+      <a href="../../index.html#explorations">← Back to Explorations</a>
+      <a href="../next-project/">Next Exploration →</a>
+    </div>
+  </div>
+</body>
+
+</html>
