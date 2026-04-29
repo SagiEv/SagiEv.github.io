@@ -16,6 +16,13 @@
   --dim: #4a7a8a;
   --panel: rgba(0, 245, 255, 0.04);
   --border: rgba(0, 245, 255, 0.15);
+  /* n8n Node Colors */
+            --c-gray: #666666;
+            --c-teal: #1d9e75;
+            --c-purple: #7f77dd;
+            --c-blue: #007bff;
+            --c-coral: #d85a30;
+            --c-amber: #ffc107;
 }
 
 *,
@@ -689,3 +696,166 @@ nav {
   }
 }
 
+/* ---------------- WORKFLOW ---------------- */
+/* SVG Workflow Styling */
+        .workflow-container {
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-top: 2rem;
+        }
+        svg { width: 100%; height: auto; display: block; }
+        .node rect { fill: rgba(20, 20, 23, 0.8); stroke-width: 1.5; }
+        .th { fill: #ffffff; font-size: 14px; font-weight: 600; font-family: sans-serif; }
+        .ts { fill: #88888e; font-size: 11px; font-family: monospace; }
+        .arr { stroke: rgba(255,255,255,0.2); stroke-width: 1.5; fill: none; }
+        
+        /* Node Type Colors */
+        .c-gray rect { stroke: var(--c-gray); }
+        .c-teal rect { stroke: var(--c-teal); }
+        .c-purple rect { stroke: var(--c-purple); }
+        .c-blue rect { stroke: var(--c-blue); }
+        .c-coral rect { stroke: var(--c-coral); }
+        .c-amber rect { stroke: var(--c-amber); }
+
+        /* Workflow Animations */
+        @keyframes flowPulse { 0%,100%{opacity:0.3; transform: scale(1);} 50%{opacity:1; transform: scale(1.2);} }
+        .flow-dot { animation: flowPulse 2s ease-in-out infinite; }
+        .flow-dot:nth-child(2){animation-delay:.4s}
+        .flow-dot:nth-child(3){animation-delay:.8s}
+
+        /* Footer */
+        .proj-footer {
+            margin-top: 6rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between;
+        }
+        .proj-footer a { color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+        /* 2. THE FLOW ANIMATION (The "Running" Lines) */
+    .arr { 
+      stroke: rgba(255,255,255,0.15); 
+      stroke-width: 1.5; 
+      stroke-dasharray: 4 4; 
+      animation: lineFlow 1s linear infinite; 
+    }
+    
+    @keyframes lineFlow {
+      from { stroke-dashoffset: 8; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    /* 3. THE DOT ANIMATION (Fixed Flickering) */
+    .flow-dot {
+      fill: #fff;
+      filter: drop-shadow(0 0 3px rgba(255,255,255,0.8));
+      animation: movePulse 3s ease-in-out infinite;
+      /* This ensures scaling happens from the center of the dot */
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    @keyframes movePulse {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Styling for the container */
+    .workflow-container {
+      background: #0f0f11;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #222;
+      margin-top: 20px;
+    }
+  /* 1. THE MISSING STYLES FOR NODES */
+    .node rect { fill: #1a1a1e; stroke-width: 1.5; }
+    .th { fill: #ffffff; font-family: sans-serif; font-size: 14px; font-weight: 600; }
+    .ts { fill: #88888e; font-family: monospace; font-size: 11px; }
+
+    /* Demo Layout for the Workflow videos */
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.demo-sub-title {
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.code-span {
+  background: rgba(255,255,255,0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #fff;
+}
+
+/* Dual Media Display */
+.dual-media-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.media-box {
+  background: #141417;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.media-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* Achievement Card */
+.achievement-card {
+  background: linear-gradient(135deg, rgba(29, 158, 117, 0.1) 0%, rgba(127, 119, 221, 0.1) 100%);
+  border: 1px solid rgba(29, 158, 117, 0.3);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1d9e75; /* Success Green */
+  line-height: 1;
+}
+
+.stat-label {
+  color: #fff;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.stat-description p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .demo-grid, .dual-media-container, .achievement-card {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
