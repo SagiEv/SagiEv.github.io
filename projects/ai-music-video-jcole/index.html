@@ -35,10 +35,14 @@
     <p class="proj-tagline">// J. Cole · Stable Diffusion · Generative Pipeline</p>
 
     <div class="proj-media">
+      <div class="media-loader" data-media="jcole-video" style="position: absolute; inset: 0;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
       <div class="proj-media-placeholder">
         <div style="aspect-ratio: 1 / 1; width: 315px; overflow: hidden;">
-          <iframe src="https://www.youtube.com/embed/VoRGVOA7sso" style="width:100%; height:100%; object-fit: cover;"
-            frameborder="0" allowfullscreen>
+          <iframe id="jcole-video" src="https://www.youtube.com/embed/VoRGVOA7sso" style="width:100%; height:100%; object-fit: cover;"
+            frameborder="0" allowfullscreen onload="document.querySelector('[data-media=jcole-video]').classList.add('hidden');">
           </iframe>
         </div>
       </div>
@@ -69,6 +73,35 @@
       <a href="../../index.html#explorations">All Explorations ↑</a>
     </div>
   </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img, iframe').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IFRAME') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        setTimeout(() => loader.classList.add('hidden'), 2000);
+      }
+    });
+  </script>
 </body>
 
 </html>

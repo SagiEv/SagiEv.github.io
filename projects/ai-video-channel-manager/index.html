@@ -34,9 +34,11 @@
     <!-- MEDIA -->
     <div class="proj-media">
       <!-- <div class="proj-media-placeholder">[ SCREENSHOT / DEMO GIF ]</div> -->
-      <div class="proj-media">
-      <!-- //use the media/SpaceShooterGameplay.mp4 -->
-      <video src="TubeFlow.mp4" autoplay muted></video>
+      <div class="media-loader" data-media="tubeflow-video">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <video id="tubeflow-video" src="TubeFlow.mp4" autoplay muted loop playsinline webkit-playsinline></video>
     </div>
 
     <!-- STACK -->
@@ -70,6 +72,30 @@
     </div>
 
   </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

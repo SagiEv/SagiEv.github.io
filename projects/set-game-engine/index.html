@@ -33,7 +33,11 @@
 
     <!-- MEDIA style="width: 50%;"-->
     <div class="proj-media">
-      <img src="set.gif" alt="Set Game">
+      <div class="media-loader" data-media="set-media">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <img id="set-media" src="set.gif" alt="Set Game">
     </div>
 
     <!-- META BAR -->
@@ -146,6 +150,30 @@
     </div>
 
   </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

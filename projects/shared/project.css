@@ -266,6 +266,83 @@ nav {
   display: block;
 }
 
+/* ── MEDIA LOADING ANIMATION ── */
+.media-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.08) 0%, rgba(0, 255, 136, 0.04) 100%);
+  z-index: 5;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.media-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-spinner {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.loader-spinner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: var(--cyan);
+  border-right-color: var(--cyan);
+  border-radius: 50%;
+  animation: spinnerRotate 0.8s linear infinite;
+}
+
+.loader-spinner::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px solid transparent;
+  border-bottom-color: var(--green);
+  border-left-color: var(--green);
+  border-radius: 50%;
+  animation: spinnerRotate 1.2s linear infinite reverse;
+}
+
+@keyframes spinnerRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-text {
+  position: absolute;
+  bottom: 20px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
 @media (max-width: 768px) {
   .proj-media-grid {
     grid-template-columns: 1fr;
@@ -574,7 +651,20 @@ nav {
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   nav {
-    padding: 16px 24px;
+    padding: 12px 16px;
+  }
+
+  .nav-logo {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
   }
 
   .page {
@@ -588,6 +678,14 @@ nav {
   .challenge-problem {
     border-right: none;
     border-bottom: 1px solid var(--border);
+  }
+
+  .proj-media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proj-title {
+    font-size: 2rem;
   }
 }
 

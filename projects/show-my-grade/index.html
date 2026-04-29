@@ -33,7 +33,11 @@
 
     <!-- MEDIA -->
     <div class="proj-media">
-      <img src="smg.png" alt="ShowMyGrade">
+      <div class="media-loader" data-media="smg-media">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <img id="smg-media" src="smg.png" alt="ShowMyGrade">
     </div>
 
     <!-- META BAR -->
@@ -136,6 +140,39 @@
     </div>
 
   </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('img, video').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      const hideLoader = () => loader.classList.add('hidden');
+      const showLoader = () => loader.classList.remove('hidden');
+
+      if (media.tagName === 'IMG') {
+        // If already loaded (cached), hide immediately
+        if (media.complete) {
+          hideLoader();
+        } else {
+          showLoader();
+          media.addEventListener('load', hideLoader);
+          media.addEventListener('error', hideLoader); // fallback
+        }
+      }
+
+      if (media.tagName === 'VIDEO') {
+        showLoader();
+
+        // When video is ready to play
+        media.addEventListener('canplay', hideLoader);
+
+        // Optional: fallback in case of error
+        media.addEventListener('error', hideLoader);
+      }
+    });
+  });
+</script>
 </body>
 
 </html>

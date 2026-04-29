@@ -32,12 +32,16 @@
     <p class="proj-tagline">// Tuna Clang · Motion Graphics · Visual Storytelling</p>
 
     <div class="proj-media">
+      <div class="media-loader" data-media="tuna-video" style="position: absolute; inset: 0;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
       <div class="proj-media-placeholder">
-        <iframe
+        <iframe id="tuna-video"
           src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FLamaTuna%2Fvideos%2F2589345934664418%2F&show_text=true&width=560&t=0"
           width="560" height="429" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
           allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowFullScreen="true"></iframe>
+          allowFullScreen="true" onload="document.querySelector('[data-media=tuna-video]').classList.add('hidden');"></iframe>
       </div>
     </div>
 
@@ -78,6 +82,35 @@
       <a href="../ai-music-video-jcole/">Next Exploration →</a>
     </div>
   </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img, iframe').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IFRAME') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        setTimeout(() => loader.classList.add('hidden'), 2000);
+      }
+    });
+  </script>
 </body>
 
 </html>

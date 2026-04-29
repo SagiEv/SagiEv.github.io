@@ -29,12 +29,20 @@
 
     <div class="proj-media-grid">
       <div class="video-item">
+        <div class="media-loader" data-media="modded-video">
+          <div class="loader-spinner"></div>
+          <div class="loader-text">Loading...</div>
+        </div>
         <div class="video-label">Modded</div>
-        <video src="Rope_Escape_Modded.mp4" autoplay muted loop></video>
+        <video id="modded-video" src="Rope_Escape_Modded.mp4" autoplay muted loop playsinline webkit-playsinline></video>
       </div>
       <div class="video-item">
+        <div class="media-loader" data-media="original-video">
+          <div class="loader-spinner"></div>
+          <div class="loader-text">Loading...</div>
+        </div>
         <div class="video-label">Original</div>
-        <video src="Rope_Escape_Original.mp4" autoplay muted loop></video>
+        <video id="original-video" src="Rope_Escape_Original.mp4" autoplay muted loop playsinline webkit-playsinline></video>
       </div>
     </div>
     <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
@@ -81,6 +89,30 @@
       <a href="../next-project/">Next Exploration →</a>
     </div>
   </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

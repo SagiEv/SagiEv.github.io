@@ -808,6 +808,16 @@
     }
 
     @media (max-width: 768px) {
+      /* Hide custom cursor on mobile */
+      .cursor,
+      .cursor-ring {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto;
+      }
+
       nav {
         padding: 16px 24px;
       }
@@ -1210,7 +1220,7 @@
       <!-- Exploration 5 -->
       <a href="projects/apk-modified-game/" class="project-card reveal" style="text-decoration:none;display:block;">
         <div class="project-num">// EXPLORE_05</div>
-        <div class="project-name">🎮 Rope Escape — Visual Reimagining</div>
+        <div class="project-name">🎮 Modified Android Game</div>
         <div class="project-stack">APKTool &middot; Android SDK &middot; Reverse Engineering</div>
         <p class="project-desc">APK deconstruction &amp; asset transformation — unpacked a mobile game, replaced all visual elements with custom superhero themes and Hebrew localization while preserving core mechanics.</p>
         <div class="project-tags">
@@ -1338,6 +1348,18 @@
     }
   `;
     document.head.appendChild(style);
+
+    // Media Loading Animation for game banner images
+    document.querySelectorAll('.game-banner-bg').forEach(img => {
+      const parent = img.closest('.game-card-link');
+      if (parent && img.style.backgroundImage) {
+        // Image is already loaded via CSS, so hide any loader if present
+        const loader = parent.querySelector('.media-loader');
+        if (loader) {
+          setTimeout(() => loader.classList.add('hidden'), 100);
+        }
+      }
+    });
   </script>
 </body>
 

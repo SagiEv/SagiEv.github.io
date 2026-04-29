@@ -33,9 +33,11 @@
 
     <!-- MEDIA  style="width: 50%;"-->
     <div class="proj-media">
-      <img src="notifier.gif" alt="Grade Notifier Bot">
-    </div>
-
+      <div class="media-loader" data-media="notifier-media">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <img id="notifier-media" src="notifier.gif" alt="Grade Notifier Bot">
     <!-- STACK -->
     <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
       <div class="stack-pills">
@@ -64,6 +66,30 @@
     </div>
 
   </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        media.addEventListener('load', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
