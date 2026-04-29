@@ -165,6 +165,22 @@
       transform: scaleX(1);
     }
 
+    /* HAMBURGER */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 600;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: var(--cyan);
+      transition: 0.3s;
+    }
+
     /* HERO */
     #hero {
       position: relative;
@@ -818,14 +834,49 @@
         cursor: auto;
       }
 
-      nav {
-        padding: 16px 24px;
+      .nav-toggle {
+        display: flex;
       }
 
       .nav-links {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(2, 10, 15, 0.98);
+        backdrop-filter: blur(10px);
+
+        flex-direction: column;
+        gap: 24px;
+        padding: 30px 24px;
+
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s ease;
+      }
+
+      .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+      }
+
+      /* ANIMATED HAMBURGER -> X */
+      .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translateY(9px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-9px);
       }
 
       section {
@@ -849,6 +900,13 @@
   <div class="grid-bg"></div>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- HAMBURGER -->
+  <div class="nav-toggle" id="navToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -1326,6 +1384,22 @@
       });
     });
 
+    // MOBILE NAV TOGGLE
+    const navToggle = document.getElementById('navToggle');
+    const navLinksContainer = document.getElementById('navLinks');
+
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navLinksContainer.classList.toggle('active');
+    });
+
+    // CLOSE MENU WHEN CLICKING LINK
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navLinksContainer.classList.remove('active');
+      });
+    });
     // PARTICLE TRAIL
     document.addEventListener('mousemove', e => {
       if (Math.random() > 0.85) {
