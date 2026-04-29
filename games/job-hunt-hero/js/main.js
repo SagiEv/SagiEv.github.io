@@ -28,6 +28,9 @@ function loop(ts) {
   showStartOverlay();
   updateHUD();
   
+  // Signal that the game is ready
+  window.dispatchEvent(new Event('gameReady'));
+
   // Start loop
   requestAnimationFrame(ts => {
     state.lastTime = ts;

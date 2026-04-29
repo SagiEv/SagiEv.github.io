@@ -588,6 +588,12 @@
 
       <!-- Original Game DOM -->
       <div id="game-wrapper">
+        <div class="media-loader" id="gameLoader">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">INITIALIZING...</div>
+          </div>
+      </div>
         <div id="title-bar">◈ JOB HUNT HERO ◈</div>
         <canvas id="game-canvas" width="520" height="580"></canvas>
         <div id="hud">
@@ -661,6 +667,17 @@
       cursor.style.display = 'block';
       ring.style.display = 'block';
     });
+
+    const gameLoader = document.getElementById('gameLoader');
+
+    // Hide loader once the game signals it's ready
+    window.addEventListener('gameReady', () => {
+      gameLoader.classList.add('hidden');
+      setTimeout(() => gameLoader.remove(), 400); // remove after fade
+    });
+
+    // Fallback: hide after 8s no matter what
+    setTimeout(() => gameLoader.classList.add('hidden'), 8000);
   </script>
 
   <script type="module" src="js/main.js"></script>
