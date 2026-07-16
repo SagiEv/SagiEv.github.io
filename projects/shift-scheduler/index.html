@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shift Scheduler — Sagi Evroni</title>
+  <link rel="stylesheet" href="../shared/project.css">
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <nav>
+    <div class="nav-logo">SE</div>
+    <ul class="nav-links">
+      <li><a href="../../#skills">Skills</a></li>
+      <li><a href="../../#projects">Projects</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#automation">Automation</a></li>
+      <li><a href="../../#explorations">Explorations</a></li>
+      <li><a href="../../#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page">
+    <div class="proj-num">// EXPLORE_01</div>
+    <h1 class="proj-title">
+      <img src="icon.png" alt="Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-right: 12px; border-radius: 8px;">
+      Shift Scheduler
+    </h1>
+    <p class="proj-tagline">// Reserve Duty Shift Management · React · Supabase · Vercel</p>
+
+    <!-- Meta / Tech Stack -->
+    <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
+      <div class="stack-pills">
+        <a href="https://github.com/SagiEv/GaronScheduler" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+          View on GitHub
+        </a>
+        <span class="stack-pill">React</span>
+        <span class="stack-pill">Supabase</span>
+        <span class="stack-pill">Vercel</span>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="proj-section">
+      <div class="proj-section-label">// System Overview</div>
+      <p><strong>Shift Scheduler</strong> is a highly specialized, responsive web application designed specifically to manage reserve duty shifts. The core problem it solves is algorithmically assigning night and day shifts while adhering to strict fairness constraints, such as ensuring no personnel is required to be awake at night more than once.</p>
+    </div>
+
+    <!-- Main Highlight Media -->
+    <div class="proj-media" style="max-width: 320px; margin-left: auto; margin-right: auto; border-radius: 20px; border: 2px solid var(--border); box-shadow: 0 20px 40px rgba(0, 245, 255, 0.1);">
+      <div class="media-loader" data-media="main-video" style="position: absolute; inset: 0; border-radius: 20px;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <video id="main-video" src="demo.mp4" autoplay loop muted playsinline style="border-radius: 20px;"
+             onloadstart="document.querySelector('[data-media=main-video]').classList.remove('hidden');" 
+             oncanplay="document.querySelector('[data-media=main-video]').classList.add('hidden');">
+      </video>
+    </div>
+
+    <!-- Features -->
+    <div class="proj-section" style="border: none; background: transparent; padding: 0; margin-bottom: 40px;">
+      <div class="proj-section-label">// Core Features</div>
+      <ul class="feature-list" style="margin-top: 16px;">
+        <li><strong>Constraint-Based Generation:</strong> Automatically generates shift lists that enforce rest periods, guaranteeing that personnel won't be assigned consecutive night shifts.</li>
+        <li><strong>Continuous Fairness Tracking:</strong> Users can paste the shift list from the previous day to act as a stateful seed, ensuring rotational fairness carries over across consecutive days.</li>
+        <li><strong>Dynamic Personnel Management:</strong> Toggle personnel status between "in base" and "at home", dynamically adjusting the pool of available shift workers on the fly.</li>
+        <li><strong>Drag & Drop Editing:</strong> Fine-tune the automatically generated schedule with a seamless drag-and-drop interface to manually adjust shift placements.</li>
+        <li><strong>Clipboard Export:</strong> Instant generation and simple one-click copy functionality to quickly share the finalized shift list across external communication channels.</li>
+      </ul>
+    </div>
+
+    <div class="proj-footer">
+      <a href="../../#explorations">← Back to Portfolio</a>
+      <a href="../kosher-space-ship-shooter/">Next Exploration →</a>
+    </div>
+  </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      } else if (media.tagName === 'IMG') {
+        if (media.complete) {
+          loader.classList.add('hidden');
+        } else {
+          media.addEventListener('load', () => {
+            loader.classList.add('hidden');
+          });
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

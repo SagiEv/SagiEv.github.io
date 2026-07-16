@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwipeLab App — Sagi Evroni</title>
+  <link rel="stylesheet" href="../shared/project.css">
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <nav>
+    <div class="nav-logo">SE</div>
+    <ul class="nav-links">
+      <li><a href="../../#skills">Skills</a></li>
+      <li><a href="../../#projects">Projects</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#automation">Automation</a></li>
+      <li><a href="../../#explorations">Explorations</a></li>
+      <li><a href="../../#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page">
+    <div class="proj-num">// PROJECT_01</div>
+    <h1 class="proj-title">SwipeLab App</h1>
+    <p class="proj-tagline">// Citizen Science · Mobile App · Full-Stack</p>
+
+    <!-- Main Highlight Media -->
+    <div class="proj-media">
+      <div class="media-loader" data-media="main-video" style="position: absolute; inset: 0;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <div class="proj-media-placeholder">
+        <iframe id="main-video"
+          src="https://www.youtube.com/embed/g5ix1OWOcxY?si=rGMH4EP4V2WgwzTZ"
+          width="100%" height="429" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+          allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          onload="document.querySelector('[data-media=main-video]').classList.add('hidden');"></iframe>
+      </div>
+    </div>
+
+    <!-- Meta / Tech Stack -->
+    <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
+      <div class="stack-pills">
+        <a href="https://github.com/SagiEv/SwipeLab" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+          View on GitHub
+        </a>
+        <a href="https://swipelab-project.netlify.app/" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.56c-.59-.72-1.42-1.37-2.9-1.37H14v-3c0-.55-.45-1-1-1h-4V9h2c1.1 0 2-.9 2-2V5.13c3.78.89 6.62 4.14 6.9 8.08.01.26.01.53-.01.81-.03 1.22-.38 2.37-1.09 3.35z"/>
+          </svg>
+          Project Website
+        </a>
+        <a href="https://swipelab.cs.bgu.ac.il/" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2V9h-2V7h4v10z"/>
+          </svg>
+          Live Web App
+        </a>
+      </div>
+      <div class="stack-pills" style="margin-top: 12px;">
+        <span class="stack-pill">React Native</span>
+        <span class="stack-pill">Spring Boot</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">Docker</span>
+        <span class="stack-pill">OAuth2</span>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="proj-section">
+      <div class="proj-section-label">// About SwipeLab</div>
+      <p>A final-year Software Engineering project at Ben-Gurion University, developed to solve real-world challenges in ecological research and data science.</p>
+    </div>
+
+    <!-- Motivation / Bottleneck -->
+    <div class="proj-section">
+      <div class="proj-section-label">// The Data Bottleneck</div>
+      <p>Ecological research generates massive amounts of raw data, but training effective AI/ML models requires human-verified labels. Currently, this manual classification process relies on a small handful of expert researchers. This creates a severe bottleneck that is time-consuming, costly, and fundamentally limits the scalability of scientific progress.</p>
+      <div class="proj-diagram" style="margin-top: 24px; padding: 0; background: transparent; border: none;">
+        <img src="bottleneck.png" alt="Data Labeling Bottleneck" style="border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);">
+      </div>
+    </div>
+
+    <!-- Challenge / Solution Pair -->
+    <div class="proj-section-label">// The Architecture of Impact</div>
+    <div class="challenge-pair">
+      <div class="challenge-problem">
+        <div class="challenge-label">// THE CHALLENGE</div>
+        <p>STARdbi contains over <strong>380,000 insect images</strong> from 84 ecological sites, but scientific analysis and ML models require labeled data. Manual classification by experts is slow and doesn't scale, leaving massive amounts of valuable data unused.</p>
+      </div>
+      <div class="challenge-solution">
+        <div class="challenge-label">// OUR SOLUTION</div>
+        <p>SwipeLab transforms this bottleneck into an opportunity. By <strong>gamifying the classification process</strong>, we enable non-experts to contribute meaningful labels through a simple, engaging swipe interface. Researchers can create tasks, monitor progress, and export high-quality labeled datasets for ML training.</p>
+      </div>
+    </div>
+
+    <!-- Media Showcase -->
+    <div class="proj-section-label" style="margin-top: 40px;">// Platform Interfaces</div>
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 40px; align-items: center;">
+      <div style="position: relative;">
+        <div class="video-label">Mobile App</div>
+        <img src="mobile_screenshot.png" alt="SwipeLab Mobile Interface" style="width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);" />
+      </div>
+      <div style="position: relative;">
+        <div class="video-label">Researcher Dashboard</div>
+        <img src="web_screenshot.png" alt="SwipeLab Web Dashboard" style="width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);" />
+      </div>
+    </div>
+
+    <!-- Real-World Impact -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Real-World Impact</div>
+      <p>Consider <em>Diaphorina citri</em>, spreading through Israeli citrus orchards. While harmless itself, it carries Greening disease—devastating to citrus crops. SwipeLab helps researchers track biological solutions like Tamarixia wasps by enabling rapid, large-scale data analysis.</p>
+    </div>
+
+    <!-- Architecture Diagram -->
+    <div class="proj-section">
+      <div class="proj-section-label">// System Architecture</div>
+      <p>The SwipeLab platform leverages an event-driven architecture to manage high-throughput image labeling tasks, authentication, and gamification mechanics synchronously.</p>
+      <div class="proj-diagram" style="background: white; border-radius: 8px;">
+        <img src="system architecture.png" alt="SwipeLab System Architecture Diagram">
+      </div>
+    </div>
+
+    <!-- Documentation & Assets -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Documentation & Assets</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px;">
+        <a href="SE15_Poster.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Project Poster (PDF)
+        </a>
+        <a href="SwipeLab - ADD.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Architecture Design (ADD)
+        </a>
+        <a href="SwipeLab - ARD.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Requirements Design (ARD)
+        </a>
+        <a href="Tests_Plan_Document.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          Tests Plan (PDF)
+        </a>
+        <a href="SwipeLab_Introduction.pptx" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 5-5v10zm9-10H11V5h8v2zm0 4H11v-2h8v2zm0 4H11v-2h8v2z"/></svg>
+          Introduction Presentation (PPTX)
+        </a>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="proj-section" style="border-color: rgba(0, 255, 136, 0.3); background: rgba(0, 255, 136, 0.02); display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+      <img src="prof.png" alt="Prof. Chen Keasar" style="width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--green); object-fit: cover; box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);">
+      <div style="flex: 1; min-width: 250px;">
+        <div class="proj-section-label" style="color: var(--green);">// Testimonial & Feedback</div>
+        <p style="font-size: 1.1rem; font-style: italic; color: rgba(232, 244, 248, 0.9); margin-bottom: 0;">
+          "SwipeLab addresses a critical bottleneck in ecological research. The gamified approach makes citizen science accessible and effective, enabling us to process data at unprecedented scale."
+        </p>
+        <div style="margin-top: 16px; display: flex; flex-direction: column;">
+          <strong style="color: var(--white); font-family: 'Orbitron', monospace;">Prof. Chen Keasar</strong>
+          <span style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--dim);">Associate Professor, BGU (Client)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scale & Stats -->
+    <div class="role-grid" style="margin-top: 24px;">
+      <div class="role-cell">
+        <div class="role-cell-label">ADOPTION</div>
+        <div class="role-cell-value">30+ Researchers</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-cell-label">SCALE</div>
+        <div class="role-cell-value">380K+ Insect Images</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-cell-label">SCOPE</div>
+        <div class="role-cell-value">84 Ecological Sites</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-cell-label">ARCHITECTURE</div>
+        <div class="role-cell-value">REST API & Microservices</div>
+      </div>
+    </div>
+
+    <div class="proj-footer">
+      <a href="../../#projects">← Back to Portfolio</a>
+      <a href="../jobpilot-application-tracker/">Next Project (JobPilot) →</a>
+    </div>
+  </div>
+</body>
+
+</html>
