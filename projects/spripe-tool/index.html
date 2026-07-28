@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spripe: 2D Sprite Asset Pipeline — Sagi Evroni</title>
+  <link rel="stylesheet" href="../shared/project.css">
+  <style>
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .workflow-step {
+      background: rgba(0, 245, 255, 0.04);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.3s;
+    }
+
+    .workflow-step:hover {
+      border-color: rgba(0, 245, 255, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 245, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .workflow-step-title {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--cyan);
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(0, 245, 255, 0.15);
+      padding-bottom: 8px;
+    }
+
+    .workflow-step-media {
+      width: 100%;
+      height: 180px;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed rgba(0, 245, 255, 0.2);
+      color: rgba(255, 255, 255, 0.3);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      position: relative;
+    }
+
+    .workflow-step-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+
+    .prompt-quote {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--green, #00ff88);
+      background: rgba(0, 255, 136, 0.04);
+      border: 1px solid rgba(0, 255, 136, 0.1);
+      border-left: 3px solid var(--green, #00ff88);
+      padding: 12px 16px;
+      line-height: 1.5;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .prompt-quote.scrollable {
+      max-height: 250px;
+    }
+
+    .prompt-quote::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .prompt-quote::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .prompt-quote::-webkit-scrollbar-thumb {
+      background: rgba(0, 255, 136, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <nav>
+    <div class="nav-logo">SE</div>
+    <ul class="nav-links">
+      <li><a href="../../#skills">Skills</a></li>
+      <li><a href="../../#projects">Projects</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#automation">Automation</a></li>
+      <li><a href="../../#explorations">Explorations</a></li>
+      <li><a href="../../#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="proj-num">// TOOL_03</div>
+    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 10px;">
+      <img src="logo.png" alt="Spripe Logo" style="height: 64px; width: auto; object-fit: contain;">
+      <h1 class="proj-title" style="margin: 0;">Spripe</h1>
+    </div>
+    <p class="proj-tagline" style="margin-bottom: 20px;">// 2D Sprite Asset Pipeline · Python · PyQt6</p>
+
+    <!-- Main Highlight Media -->
+    <div class="proj-media" style="margin-bottom: 24px;">
+      <div class="media-loader" data-media="main-video" style="position: absolute; inset: 0;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <img id="main-video" src="spripe-preview.gif" alt="Spripe Preview"
+        style="width: 100%; object-fit: cover; min-height: 300px; display: none;"
+        onload="this.style.display='block'; this.previousElementSibling.style.display='none';"
+        onerror="this.previousElementSibling.innerHTML='<div class=\'loader-text\'>[ Placeholder: spripe-preview.gif ]</div>'">
+    </div>
+
+    <!-- Meta / Tech Stack -->
+    <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
+      <div class="stack-pills">
+        <a href="https://github.com/SagiEv/spripe" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      <div class="stack-pills" style="margin-top: 12px;">
+        <span class="stack-pill">Python</span>
+        <span class="stack-pill">PyQt6</span>
+        <span class="stack-pill">OpenCV</span>
+        <span class="stack-pill">rembg</span>
+        <span class="stack-pill">PIL</span>
+      </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Overview</div>
+      <p>An open-source, end-to-end asset generation tool designed to streamline the process of transforming raw video
+        references into production-ready 2D sprites.</p>
+      <p>Spripe automates the tedious aspects of sprite creation—like background removal and frame extraction—while
+        offering a suite of built-in, Photoshop-style editing tools for fine-tuning.</p>
+    </div>
+
+    <!-- WORKFLOW GIFS SECTION -->
+    <div class="proj-section">
+      <div class="proj-section-label">// End-to-End Workflow</div>
+      <p>A complete demonstration of the transformation process, from raw generation to game-ready assets.</p>
+
+      <div class="workflow-grid">
+        <div class="workflow-step" style="grid-column: 1 / -1;">
+          <div class="workflow-step-title">1. Prompt to Asset Creation</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+            <div>
+              <div class="prompt-quote">"create a caricature face only from front and from profile based on this photos: [attached person's face images]"</div>
+              <div class="workflow-step-media">
+                [ result.png ]
+                <img src="result.png" alt="Result Image"
+                  onload="this.style.display='block'; this.parentNode.style.color='transparent';"
+                  onerror="this.style.display='none';">
+              </div>
+            </div>
+            <div>
+              <div class="prompt-quote">"create a 2d picture design for a game of exactly him [attached caricature result from chatgpt] front and profile in a fight position full body (for a tekken alike game) white background same face like the caricature style"</div>
+              <div class="workflow-step-media">
+                [ asset_design.png ]
+                <img src="asset_design.png" alt="Asset Design"
+                  onload="this.style.display='block'; this.parentNode.style.color='transparent';"
+                  onerror="this.style.display='none';">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="workflow-step" style="grid-column: 1 / -1;">
+          <div class="workflow-step-title">2. Prompt to Video</div>
+          <div style="display: flex; gap: 24px; align-items: stretch; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px; display: flex; flex-direction: column; gap: 12px;">
+              <div class="prompt-quote" style="text-align: center; border-left: none; border-top: 3px solid var(--green, #00ff88);">[ Prompt Reference Image ]</div>
+              <div class="workflow-step-media" style="flex-grow: 1;">
+                [ reference.png ]
+                <img src="reference.png" alt="Reference Image"
+                  onload="this.style.display='block'; this.parentNode.style.color='transparent';"
+                  onerror="this.style.display='none';">
+              </div>
+            </div>
+
+            <div
+              style="display: flex; align-items: center; justify-content: center; color: var(--cyan); font-size: 2rem; font-family: 'Share Tech Mono', monospace; padding: 0 10px;">
+              →
+            </div>
+
+            <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 12px;">
+              <div class="prompt-quote scrollable"># Character Animation Generation Prompts (Video Generator LLM)
+
+                ## Purpose
+
+                Generate high-quality 2D fighting game character animations from a **single static idle character
+                image**.
+
+                The generated videos will be used as source material/reference for creating sprite sheets and animations
+                for
+                a Godot 4 fighting game.
+
+                The character design, proportions, clothes, face, colors, and art style must remain consistent with the
+                provided idle image.
+
+                ---
+
+                # Global Instructions For All Animations
+
+                ## Input
+
+                You will receive:
+
+                - One static idle character image.
+                - Character description (optional).
+                - Animation type.
+
+                The image is the **source of truth**.
+
+                ---
+
+                # Background Requirements (IMPORTANT)
+
+                The generated animation video MUST have:
+
+                - Pure white background (#FFFFFF).
+                - No environment.
+                - No floor.
+                - No scenery.
+                - No background objects.
+                - No additional characters.
+                - No shadows unless they are part of the character design.
+                - No camera movement.
+
+                The character must be clearly separated from the white background.
+
+                The white background must remain consistent across all frames to allow easy sprite extraction and
+                conversion
+                into Godot sprite sheets.
+
+                ---
+
+                # Character Consistency Requirements
+
+                Maintain:
+
+                - Same character identity.
+                - Same face.
+                - Same hairstyle.
+                - Same clothes.
+                - Same body proportions.
+                - Same art style.
+                - Same colors.
+                - Same accessories.
+                - Same silhouette.
+
+                Do NOT:
+
+                - Change the character design.
+                - Add new clothing.
+                - Remove details.
+                - Change age/body shape.
+                - Modify facial features.
+                - Change art style.
+                - Add random accessories.
+
+                ---
+
+                # Fighting Game Requirements
+
+                The animation should look like a professional 2D fighting game.
+
+                Requirements:
+
+                - Full body visible.
+                - Side-view fighting perspective.
+                - Character facing the opponent direction.
+                - Clear silhouette.
+                - Strong readable poses.
+                - Exaggerated fighting motions.
+                - Clean animation frames.
+                - Suitable for sprite sheet extraction.
+
+                The animation should feel similar to:
+
+                - Tekken 2D gameplay.
+                - Street Fighter style animation.
+                - Modern arcade fighting games.
+
+                ---
+
+                # Camera Requirements
+
+                Use:
+
+                - Fixed camera.
+                - Full body visible at all times.
+                - Character centered.
+                - Same scale throughout the animation.
+                - Same camera angle as the reference image.
+                - No camera movement.
+                - No zoom.
+                - No rotation.
+                - No cinematic shots.
+
+                ---
+
+                # Motion Quality Requirements
+
+                The animation should have:
+
+                - Clear anticipation.
+                - Strong impact frames.
+                - Follow-through.
+                - Smooth transitions.
+                - Fighting game timing.
+
+                Use:
+
+                - 60 FPS feeling.
+                - Arcade fighting game style.
+                - Dynamic poses.
+
+                Avoid:
+
+                - Realistic slow motion.
+                - Motion blur.
+                - Unclear poses.
+                - Excessive deformation.
+
+                ---
+
+                # Effects Rules
+
+                For normal attacks:
+
+                - Focus mainly on body movement.
+                - No unnecessary visual effects.
+                - Keep the character readable.
+
+                For special attacks:
+
+                Allowed:
+
+                - Energy effects.
+                - Weapons.
+                - Magic.
+                - Visual impact effects.
+                - Unique character abilities.
+
+                However:
+
+                - Background must remain pure white.
+                - Effects must not hide the character.
+                - Effects must stay inside the fighting animation area.
+                - Character silhouette must remain clear.
+
+                ---
+
+                # Idle Animation
+                ## Prompt
+                Create a seamless idle fighting stance animation from the provided character image.
+                The character should:
+                - Stand in a ready combat position.
+                - Slight breathing motion.
+                - Small body movement.
+                - Natural weight shifting.
+                - Slight hand movement.
+                - Maintain the exact character appearance.
+                Animation length:
+                6-12 frames loop.
+                Style:
+                Professional 2D fighting game idle animation.
+
+                *(Note: [attached reference.png] is provided to the LLM alongside this text)*</div>
+              <div class="workflow-step-media" style="flex-grow: 1;">
+                [ output.mp4 ]
+                <video src="output.mp4" autoplay loop muted playsinline
+                  style="width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; display: none;"
+                  oncanplay="this.style.display='block'; this.parentNode.style.color='transparent';"
+                  onerror="this.style.display='none';"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-title">3. PNG Sequence (12fps)</div>
+          <div class="workflow-step-media">
+            [ step4.mp4 ]
+            <video src="step4.mp4" autoplay loop muted playsinline
+              style="width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; display: none;"
+              oncanplay="this.style.display='block'; this.parentNode.style.color='transparent';"
+              onerror="this.style.display='none';"></video>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-title">4. Spripe: Transparent Seq.</div>
+          <div class="workflow-step-media">
+            [ step5.gif ]
+            <img src="step5.gif" alt="Transparent PNG Sequence"
+              onload="this.style.display='block'; this.parentNode.style.color='transparent';"
+              onerror="this.style.display='none';">
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-title">5. Normalize Animation</div>
+          <div class="workflow-step-media">
+            [ step6.mp4 ]
+            <video src="step6.mp4" autoplay loop muted playsinline
+              style="width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; display: none;"
+              oncanplay="this.style.display='block'; this.parentNode.style.color='transparent';"
+              onerror="this.style.display='none';"></video>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-title">6. Manual Cleanup</div>
+          <div class="workflow-step-media">
+            [ step7.mp4 ]
+            <video src="step7.mp4" autoplay loop muted playsinline
+              style="width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; display: none;"
+              oncanplay="this.style.display='block'; this.parentNode.style.color='transparent';"
+              onerror="this.style.display='none';"></video>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-title">7. Compressing Output</div>
+          <div class="workflow-step-media">
+            [ step8.mp4 ]
+            <video src="step8.mp4" autoplay loop muted playsinline
+              style="width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; display: none;"
+              oncanplay="this.style.display='block'; this.parentNode.style.color='transparent';"
+              onerror="this.style.display='none';"></video>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-title">8. Result Output</div>
+          <div class="workflow-step-media">
+            [ step9.gif ]
+            <img src="step9.gif" alt="Result Output"
+              onload="this.style.display='block'; this.parentNode.style.color='transparent';"
+              onerror="this.style.display='none';">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECHNICAL PIPELINE -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Technical Pipeline</div>
+
+      <h3
+        style="color: var(--cyan); margin: 30px 0 10px; font-family: 'Share Tech Mono', monospace; font-size: 1.1rem;">
+        1. Video to PNG Sequence Extraction</h3>
+      <p>The process begins by ingesting a source video file. We read the video stream frame-by-frame, extracting the
+        necessary visual data at the correct framerate. Each captured frame is then serialized and saved as a lossless
+        PNG image, preserving the original quality.</p>
+      <p style="font-size: 0.9em; opacity: 0.8; margin-top: 8px;"><strong>Core Tech:</strong> OpenCV
+        (<code>opencv-python</code>) and NumPy for vectorized processing.</p>
+
+      <h3
+        style="color: var(--cyan); margin: 30px 0 10px; font-family: 'Share Tech Mono', monospace; font-size: 1.1rem;">
+        2. Background Removal & Transparency</h3>
+      <p>Each frame is passed through an AI-driven background removal model. The model analyzes the image to distinguish
+        the primary subject from the background, creating an alpha mask. This mask is applied to the image, converting
+        all background pixels to transparent, leaving a clean, isolated sprite ready for animation.</p>
+      <p style="font-size: 0.9em; opacity: 0.8; margin-top: 8px;"><strong>Core Tech:</strong> <code>rembg</code>
+        (U2-Net) and Pillow (<code>PIL</code>).</p>
+
+      <h3
+        style="color: var(--cyan); margin: 30px 0 10px; font-family: 'Share Tech Mono', monospace; font-size: 1.1rem;">
+        3. Manual Editing & Photoshop-like Tools</h3>
+      <p>Since automated AI removal isn't always perfect, Spripe includes a comprehensive suite of manual editing tools.
+        The application features a custom-built GUI with a timeline for frame navigation, layering capabilities, and
+        interactive drawing tools (brush, eraser, selection) that mimic professional software like Photoshop.</p>
+      <p style="font-size: 0.9em; opacity: 0.8; margin-top: 8px;"><strong>Core Tech:</strong> PyQt6
+        (<code>QGraphicsScene</code> / <code>QGraphicsView</code>) and Pillow (<code>PIL</code>).</p>
+
+      <h3
+        style="color: var(--cyan); margin: 30px 0 10px; font-family: 'Share Tech Mono', monospace; font-size: 1.1rem;">
+        4. Normalization and Export</h3>
+      <p>The normalization process automatically detects the bounding box of the subject across all frames, crops out
+        unnecessary transparent padding, and centers the sprite within a standardized canvas size. This guarantees that
+        the animation will play smoothly without jittering when imported into an engine.</p>
+      <p style="font-size: 0.9em; opacity: 0.8; margin-top: 8px;"><strong>Core Tech:</strong> NumPy, OpenCV, and Pillow
+        (<code>PIL</code>).</p>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="proj-footer">
+      <a href="../../index.html#automation">← Back to Automation</a>
+      <a href="#">Back to Top ↑</a>
+    </div>
+  </div>
+</body>
+
+</html>
