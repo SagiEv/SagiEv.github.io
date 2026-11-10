@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function(){try{if(sessionStorage.getItem('lang_fade')==='true'){document.documentElement.classList.add('lang-fade-entering');}}catch(e){}})();
+  </script>
+  <title>WebMixer — Sagi Evroni</title>
+  <link rel="stylesheet" href="../shared/project.css?v=8">
+  <style>
+    .hardware-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .hardware-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: rgba(0, 245, 255, 0.05);
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      color: var(--cyan);
+    }
+
+    .feature-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .showcase-card {
+      background: rgba(2, 18, 27, 0.6);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .showcase-card:hover {
+      border-color: rgba(0, 245, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .showcase-img-wrap {
+      width: 100%;
+      background: #020c12;
+      border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .showcase-img-wrap img {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .showcase-info {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .showcase-title {
+      font-family: 'Share Tech Mono', monospace;
+      color: #fff;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .showcase-desc {
+      color: rgba(232, 244, 248, 0.7);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .arch-code-block {
+      background: #020d14;
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      border-radius: 8px;
+      padding: 18px 22px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(232, 244, 248, 0.85);
+      margin-top: 16px;
+      overflow-x: auto;
+    }
+
+    .arch-code-block .highlight {
+      color: var(--cyan);
+    }
+
+    .arch-header {
+      margin-bottom: 8px;
+    }
+
+    .arch-tree {
+      display: grid;
+      grid-template-columns: max-content max-content minmax(260px, 1fr);
+      column-gap: 14px;
+      row-gap: 6px;
+      align-items: baseline;
+    }
+
+    .arch-row {
+      display: contents;
+    }
+
+    .arch-file {
+      white-space: pre;
+    }
+
+    .arch-arrow {
+      color: var(--cyan);
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+
+    <nav>
+    <div class="nav-brand">
+      <a href="../../" class="nav-logo">SE</a>
+      <div class="nav-socials">
+        <a href="http://github.com/SagiEv/" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/sagi-evroni" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74v-8.37H5.06v8.37h2.8z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../#projects">Projects</a></li>
+      <li><a href="../../#games">Games</a></li>
+      <li><a href="../../#automation">Automation</a></li>
+      <li><a href="../../#explorations">Explorations</a></li>
+      <li><a href="../../#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch" aria-label="Language Selector">
+        <a href="./" class="lang-btn active" data-lang="en">EN</a>
+        <span class="lang-divider">/</span>
+        <a href="he/" class="lang-btn" data-lang="he">עב</a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="proj-num">// TOOL_05</div>
+    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 12px; flex-wrap: wrap;">
+      <img src="assets/logo.png" alt="WebMixer Logo" style="height: 64px; width: auto; object-fit: contain;">
+      <h1 class="proj-title" style="margin: 0;">WebMixer</h1>
+    </div>
+    <p class="proj-tagline">// Browser DJ Console for YouTube · Web MIDI API · AudioContext · Real-Time Audio DSP</p>
+
+    <!-- MEDIA -->
+    <div class="proj-media">
+      <div class="media-loader" data-media="webmixer-media">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <img id="webmixer-media" src="assets/screenshot.png" alt="WebMixer DJ Console Interface">
+    </div>
+
+    <!-- META BAR -->
+    <div class="proj-meta">
+      <div class="stack-pills" style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="https://chromewebstore.google.com/detail/webmixer/nkpdopalnkilcpejcngongmpeejcinad" class="github-link" target="_blank" rel="noopener" style="border-color: rgba(0, 245, 255, 0.4); background: rgba(0, 245, 255, 0.08); color: var(--cyan);">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.499A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.847-2.632L1.931 5.499zm14.847 4.501a5.455 5.455 0 0 1 1.767 4.001c0 2.274-1.391 4.223-3.376 5.045l3.953 6.848C22.257 22.84 24 17.77 24 12c0-1.874-.431-3.647-1.199-5.23L16.778 10zM12 16.364a4.364 4.364 0 1 1 0-8.727 4.364 4.364 0 0 1 0 8.727z"/>
+          </svg>
+          Chrome Web Store ↗
+        </a>
+        <a href="https://github.com/SagiEv/webmixer/" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2 0-.4-.5-1.6.2-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5.1 18 5.4 18 5.4c.7 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3" />
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+      <div class="stack-pills" style="margin-top: 14px;">
+        <span class="stack-pill">Automation</span>
+        <span class="stack-pill">Web MIDI API</span>
+        <span class="stack-pill">Web Audio API</span>
+        <span class="stack-pill">Audio DSP</span>
+        <span class="stack-pill">Chrome Extension (MV3)</span>
+        <span class="stack-pill">JavaScript ES6+</span>
+        <span class="stack-pill">YouTube DOM Scripting</span>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Overview</div>
+      <p><strong>WebMixer</strong> allows DJs to plug in affordable or professional MIDI controllers and mix music <em>directly</em> from active YouTube tabs in the browser. You no longer need to download MP3 files or manage heavy desktop software like Rekordbox or Serato just to jam to tracks on YouTube.</p>
+      <p>The extension injects high-precision content scripts into YouTube tabs that control playback, audio equalization, speed, and seeking in real time, all routed from physical hardware controls with zero perceptible latency.</p>
+    </div>
+
+    <!-- KEY CAPABILITIES -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Key Features</div>
+      <ul class="feature-list">
+        <li><strong>Dual Deck Control:</strong> Route two independent YouTube tabs to Deck A and Deck B with individual gain, pitch, and playback control.</li>
+        <li><strong>Full Hardware MIDI Integration:</strong> Standard Play/Pause, Cue points, Jog wheels (Scratch & Pitch Bend), Crossfader, and multi-band rotary EQs.</li>
+        <li><strong>Real-Time Audio DSP:</strong> Switchable 2-band (Treble/Bass) or 3-band (Hi/Mid/Low) biquad audio equalization directly injected into the media element stream.</li>
+        <li><strong>Browser Effects Pad:</strong> Apply real-time web audio effects such as Echo, Flanger, and Reverb via an interactive XY touch/mouse pad.</li>
+        <li><strong>Drag-and-Drop Queue:</strong> Built-in YouTube video search panel inside the console; drag search results directly into Deck queues.</li>
+        <li><strong>Background Operation:</strong> Mix, scratch, and browse tracks from your physical mixer completely in the background while other tabs or windows are in focus.</li>
+        <li><strong>Modular MIDI Engine:</strong> Generic routing engine that supports virtually any MIDI controller via customizable mapping files, supplemented by an interactive MIDI Learn logger.</li>
+      </ul>
+    </div>
+
+    <!-- FEATURE SHOWCASE -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Interface & Feature Highlights</div>
+      <div class="feature-showcase-grid">
+
+        <!-- Card 1: Search -->
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/yt-search.png" alt="YouTube Search Panel">
+          </div>
+          <div class="showcase-info">
+            <div class="showcase-title">YouTube Search Panel</div>
+            <div class="showcase-desc">Search for any YouTube track or set directly from within the DJ console without switching browser tabs.</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Queue -->
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/queue.png" alt="Track Queue">
+          </div>
+          <div class="showcase-info">
+            <div class="showcase-title">Independent Deck Queues</div>
+            <div class="showcase-desc">Maintain separate track queues per deck. Drag and drop search results directly to ready your next mix seamlessly.</div>
+          </div>
+        </div>
+
+        <!-- Card 3: Notifications Browse -->
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/notification-browse.png" alt="Hardware Browse Notification">
+          </div>
+          <div class="showcase-info">
+            <div class="showcase-title">Controller Browse Notifications</div>
+            <div class="showcase-desc">Rotate your mixer's browse knob to scroll through search results even when the extension UI is in a background tab.</div>
+          </div>
+        </div>
+
+        <!-- Card 4: Notifications Added -->
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/notification-added.png" alt="Track Added Notification">
+          </div>
+          <div class="showcase-info">
+            <div class="showcase-title">Real-Time Confirmation</div>
+            <div class="showcase-desc">Receive immediate desktop feedback showing current playback status and what track is queued up next.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Software Architecture</div>
+      <p>WebMixer was engineered around a decoupled, event-driven Chrome Extension architecture (Manifest V3) that coordinates between USB hardware, background service workers, and host page audio graphs:</p>
+
+      <div class="arch-code-block">
+        <div class="arch-header highlight">// System Architecture Breakdown:</div>
+        <div class="arch-tree">
+          <div class="arch-row">
+            <span class="arch-file">├── <span class="highlight">dj.html / dj.js</span></span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-desc">DJ Console UI: Visual decks, EQ rotary knobs, XY Pad, and queue state.</span>
+          </div>
+          <div class="arch-row">
+            <span class="arch-file">├── <span class="highlight">background.js</span></span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-desc">Central Service Worker: Maintains unified state, routes MIDI commands to active tabs.</span>
+          </div>
+          <div class="arch-row">
+            <span class="arch-file">├── <span class="highlight">midi_mappings.js</span></span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-desc">Translation Layer: Maps raw MIDI hex bytes ([0x90, 0x0B, 0x7F]) to actions ({PLAY_PAUSE, Deck A}).</span>
+          </div>
+          <div class="arch-row">
+            <span class="arch-file">└── <span class="highlight">content.js</span></span>
+            <span class="arch-arrow">→</span>
+            <span class="arch-desc">Injected Script: Intercepts &lt;video&gt;, constructs Web Audio AudioContext graphs, and executes DSP.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HARDWARE SUPPORT -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Supported Hardware Controllers</div>
+      <p>Through the Web MIDI API, WebMixer auto-detects connected hardware with native mapping profiles:</p>
+      <div class="hardware-tags">
+        <span class="hardware-badge">ION Discover DJ</span>
+        <span class="hardware-badge">Pioneer DDJ-FLX4</span>
+        <span class="hardware-badge">Pioneer DDJ-400</span>
+        <span class="hardware-badge">Pioneer DDJ-SB2 / SB3</span>
+        <span class="hardware-badge">Pioneer DDJ-RB</span>
+        <span class="hardware-badge">Pioneer DDJ-SX / SX2</span>
+        <span class="hardware-badge">Pioneer DDJ-1000 / 800</span>
+        <span class="hardware-badge">Numark Mixtrack Pro / Platinum</span>
+        <span class="hardware-badge">Hercules DJControl Family</span>
+        <span class="hardware-badge">Traktor Kontrol S2</span>
+        <span class="hardware-badge">+ Any MIDI Device (MIDI Learn)</span>
+      </div>
+    </div>
+
+    <!-- ROLE & CONTEXT -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Role & Context</div>
+      <div class="role-grid">
+        <div class="role-cell">
+          <div class="role-cell-label">AUTHOR</div>
+          <div class="role-cell-value">Sagi Evroni</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">TYPE</div>
+          <div class="role-cell-value">Chrome Extension / Web Audio</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">STORE STATUS</div>
+          <div class="role-cell-value">Live on Chrome Web Store</div>
+        </div>
+        <div class="role-cell">
+          <div class="role-cell-label">YEAR</div>
+          <div class="role-cell-value">2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS -->
+    <div class="proj-section">
+      <div class="proj-section-label">// Status</div>
+      <div class="proj-status completed">Published on Chrome Web Store · Open Source</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="proj-footer" aria-label="Project navigation">
+      <a href="../show-my-grade/" class="proj-nav-btn proj-nav-prev proj-nav-with-icon">
+        <img src="../show-my-grade/icon.png" alt="" class="proj-nav-icon">
+        <span class="proj-nav-text">
+          <span class="proj-nav-label">← Previous Tool</span>
+          <span class="proj-nav-title">ShowMyGrade</span>
+        </span>
+      </a>
+      <a href="../../#automation" class="proj-nav-btn proj-nav-back">
+        <span class="proj-nav-label">↖ Back to Section</span>
+        <span class="proj-nav-title">Automation Tools</span>
+      </a>
+      <a href="../grade-notifier-bot/" class="proj-nav-btn proj-nav-next proj-nav-with-icon">
+        <img src="../grade-notifier-bot/icon.svg" alt="" class="proj-nav-icon">
+        <span class="proj-nav-text">
+          <span class="proj-nav-label">Next Tool →</span>
+          <span class="proj-nav-title">Grade Notifier Bot</span>
+        </span>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('img, video').forEach(media => {
+        const loader = document.querySelector(`[data-media="${media.id}"]`);
+        if (!loader) return;
+
+        const hideLoader = () => loader.classList.add('hidden');
+        const showLoader = () => loader.classList.remove('hidden');
+
+        if (media.tagName === 'IMG') {
+          if (media.complete) {
+            hideLoader();
+          } else {
+            showLoader();
+            media.addEventListener('load', hideLoader);
+            media.addEventListener('error', hideLoader);
+          }
+        }
+
+        if (media.tagName === 'VIDEO') {
+          showLoader();
+          media.addEventListener('canplay', hideLoader);
+          media.addEventListener('error', hideLoader);
+        }
+      });
+    });
+  
+    // Mobile Nav Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth Language Switch Crossfade
+    (function initLangFade() {
+      const enLangBtn = document.querySelector('.lang-btn[data-lang="en"]');
+      const heLangBtn = document.querySelector('.lang-btn[data-lang="he"]');
+      const langSwitch = document.getElementById('langSwitch');
+      const isHebrew = document.documentElement.lang === 'he';
+      const targetBtn = isHebrew ? enLangBtn : heLangBtn;
+      const currentBtn = isHebrew ? heLangBtn : enLangBtn;
+      const targetLang = isHebrew ? 'en' : 'he';
+      let isSwitching = false;
+
+      if (sessionStorage.getItem('lang_fade') === 'true') {
+        sessionStorage.removeItem('lang_fade');
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('lang-fade-entering');
+          document.body.classList.add('lang-fade-in');
+          setTimeout(() => {
+            document.body.classList.remove('lang-fade-in');
+          }, 250);
+        });
+      } else {
+        document.documentElement.classList.remove('lang-fade-entering');
+      }
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+      }, 500);
+
+      if (targetBtn) {
+        targetBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (isSwitching) return;
+          isSwitching = true;
+
+          if (langSwitch) langSwitch.classList.add('switching');
+          if (currentBtn) currentBtn.classList.remove('active');
+          targetBtn.classList.add('active');
+
+          const targetUrl = (targetBtn.getAttribute('href') || (isHebrew ? '../' : 'he/')) + (window.location.hash || '');
+
+          sessionStorage.setItem('lang_fade', 'true');
+          try { localStorage.setItem('preferred_lang', targetLang); } catch (err) {}
+
+          document.body.classList.add('lang-fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 180);
+        });
+      }
+
+      window.addEventListener('pageshow', () => {
+        isSwitching = false;
+        sessionStorage.removeItem('lang_fade');
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+        document.body.classList.remove('lang-fade-in');
+        if (langSwitch) langSwitch.classList.remove('switching');
+        if (currentBtn) currentBtn.classList.add('active');
+        if (targetBtn) targetBtn.classList.remove('active');
+      });
+    })();
+  </script>
+</body>
+
+</html>

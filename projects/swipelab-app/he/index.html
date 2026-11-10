@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function(){try{if(sessionStorage.getItem('lang_fade')==='true'){document.documentElement.classList.add('lang-fade-entering');}}catch(e){}})();
+  </script>
+  <title>SwipeLab App — שגיא עברוני</title>
+  <link rel="stylesheet" href="../../shared/project.css?v=8">
+  
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+    <nav>
+    <div class="nav-brand">
+      <a href="../../../he/" class="nav-logo">SE</a>
+      <div class="nav-socials">
+        <a href="http://github.com/SagiEv/" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/sagi-evroni" target="_blank" rel="noopener noreferrer" class="nav-social-btn" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74v-8.37H5.06v8.37h2.8z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../../he/#projects">פרויקטים</a></li>
+      <li><a href="../../../he/#games">משחקים</a></li>
+      <li><a href="../../../he/#automation">אוטומציה</a></li>
+      <li><a href="../../../he/#explorations">מחקר ופיתוח</a></li>
+      <li><a href="../../../he/#contact">צור קשר</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch" aria-label="בורר שפה">
+        <a href="../" class="lang-btn" data-lang="en">EN</a>
+        <span class="lang-divider">/</span>
+        <a href="./" class="lang-btn active" data-lang="he">עב</a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="proj-num">// PROJECT_01</div>
+    <h1 class="proj-title">
+      <img src="../icon.png" alt="SwipeLab Icon" style="width: 48px; height: 48px; vertical-align: middle; margin-left: 12px; border-radius: 8px;">
+      SwipeLab App
+    </h1>
+    <p class="proj-tagline">// מדע אזרחי · אפליקציית מובייל · Full-Stack</p>
+
+    <!-- Main Highlight Media -->
+    <div class="proj-media">
+      <div class="media-loader" data-media="main-video" style="position: absolute; inset: 0;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <div class="proj-media-placeholder">
+        <iframe id="main-video"
+          src="https://www.youtube.com/embed/g5ix1OWOcxY?si=rGMH4EP4V2WgwzTZ"
+          width="100%" height="429" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+          allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          onload="document.querySelector('[data-media=main-video]').classList.add('hidden');"></iframe>
+      </div>
+    </div>
+
+    <!-- Meta / Tech Stack -->
+    <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
+      <div class="stack-pills">
+        <a href="https://github.com/SagiEv/SwipeLab" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+          צפייה ב-GitHub
+        </a>
+        <a href="https://swipelab-project.netlify.app/" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.56c-.59-.72-1.42-1.37-2.9-1.37H14v-3c0-.55-.45-1-1-1h-4V9h2c1.1 0 2-.9 2-2V5.13c3.78.89 6.62 4.14 6.9 8.08.01.26.01.53-.01.81-.03 1.22-.38 2.37-1.09 3.35z"/>
+          </svg>
+          אתר הפרויקט
+        </a>
+        <a href="https://swipelab.cs.bgu.ac.il/" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2V9h-2V7h4v10z"/>
+          </svg>
+          אפליקציית Web פעילה
+        </a>
+      </div>
+      <div class="stack-pills" style="margin-top: 12px;">
+        <span class="stack-pill">React Native</span>
+        <span class="stack-pill">Spring Boot</span>
+        <span class="stack-pill">PostgreSQL</span>
+        <span class="stack-pill">Docker</span>
+        <span class="stack-pill">OAuth2</span>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="proj-section">
+      <div class="proj-section-label">// אודות SwipeLab</div>
+      <p>פרויקט גמר בהנדסת תוכנה באוניברסיטת בן-גוריון בנגב, שפותח במטרה לפתור אתגרי עולם אמיתי במחקר אקולוגי ובמדעי הנתונים.</p>
+    </div>
+
+    <!-- Motivation / Bottleneck -->
+    <div class="proj-section">
+      <div class="proj-section-label">// צוואר הבקבוק בתיוג נתונים</div>
+      <p>מחקר אקולוגי מייצר כמויות עצומות של נתונים גולמיים, אך אימון מודלי AI/ML יעילים דורש תיוג מאומת בידי אדם. כיום, תהליך זה נשען על קומץ חוקרים מומחים בלבד, מה שיוצר צוואר בקבוק חמור, איטי ויקר המגביל את התקדמות המדע.</p>
+      <div class="proj-diagram" style="margin-top: 24px; padding: 0; background: transparent; border: none;">
+        <img src="../bottleneck.png" alt="Data Labeling Bottleneck" style="border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);">
+      </div>
+    </div>
+
+    <!-- Challenge / Solution Pair -->
+    <div class="proj-section-label">// ארכיטקטורה של אימפקט</div>
+    <div class="challenge-pair">
+      <div class="challenge-problem">
+        <div class="challenge-label">// האתגר</div>
+        <p>מאגר STARdbi מכיל מעל <strong>380,000 תמונות חרקים</strong> מ-84 אתרים אקולוגיים, אך אימון מודלים דורש תיוג מסווג. תיוג ידני בידי מומחים אינו סקיילבילי, ומותיר כמויות עתק של נתונים יקרי ערך ללא שימוש.</p>
+      </div>
+      <div class="challenge-solution">
+        <div class="challenge-label">// הפתרון שלנו</div>
+        <p>SwipeLab הופכת את צוואר הבקבוק להזדמנות. באמצעות <strong>גיימיפיקציה של תהליך התיוג</strong>, אנו מאפשרים לקהל הרחב לתרום תיוגים איכותיים בממשק החלקה (Swipe) מהיר ומהנה. חוקרים יכולים להגדיר משימות, לעקוב אחר ההתקדמות ולייצא נתונים איכותיים לאימון מודלים.</p>
+      </div>
+    </div>
+
+    <!-- Media Showcase -->
+    <div class="proj-section-label" style="margin-top: 40px;">// ממשקי הפלטפורמה</div>
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 40px; align-items: center;">
+      <div style="position: relative;">
+        <div class="video-label">אפליקציית מובייל</div>
+        <img src="../mobile_screenshot.png" alt="SwipeLab Mobile Interface" style="width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);" />
+      </div>
+      <div style="position: relative;">
+        <div class="video-label">דשבורד חוקרים</div>
+        <img src="../web_screenshot.png" alt="SwipeLab Web Dashboard" style="width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);" />
+      </div>
+    </div>
+
+    <!-- Real-World Impact -->
+    <div class="proj-section">
+      <div class="proj-section-label">// השפעה בעולם האמיתי</div>
+      <p>דוגמה מעשית: המזיק <em>Diaphorina citri</em> המתפשט בפרדסי ישראל נושא את מחלת הגרינינג הקטלנית להדרים. SwipeLab מסייעת לחוקרים לעקוב אחר פתרונות ביולוגיים (כגון צרעות טפיליות מזן Tamarixia) באמצעות ניתוח מהיר ורחב היקף של תמונות שדה.</p>
+    </div>
+
+    <!-- Architecture Diagram -->
+    <div class="proj-section">
+      <div class="proj-section-label">// ארכיטקטורת המערכת</div>
+      <p>הפלטפורמה מבוססת על ארכיטקטורה מונחית אירועים לניהול משימות תיוג תמונות בתפוקה גבוהה, מנגנוני אימות מאובטחים ומכניקות משחוק מקביליות.</p>
+      <div class="proj-diagram" style="background: white; border-radius: 8px;">
+        <img src="../system architecture.png" alt="SwipeLab System Architecture Diagram">
+      </div>
+    </div>
+
+    <!-- Documentation & Assets -->
+    <div class="proj-section">
+      <div class="proj-section-label">// תיעוד ומסמכים</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px;">
+        <a href="../SE15_Poster.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          פוסטר הפרויקט (PDF)
+        </a>
+        <a href="../SwipeLab - ADD.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          מסמך ארכיטקטורה (ADD)
+        </a>
+        <a href="../SwipeLab - ARD.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          מסמך דרישות (ARD)
+        </a>
+        <a href="../Tests_Plan_Document.pdf" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+          תוכנית בדיקות (PDF)
+        </a>
+        <a href="../SwipeLab_Introduction.pptx" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 5-5v10zm9-10H11V5h8v2zm0 4H11v-2h8v2zm0 4H11v-2h8v2z"/></svg>
+          מצגת היכרות (PPTX)
+        </a>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="proj-section" style="border-color: rgba(0, 255, 136, 0.3); background: rgba(0, 255, 136, 0.02); display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+      <img src="../prof.png" alt="Prof. Chen Keasar" style="width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--green); object-fit: cover; box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);">
+      <div style="flex: 1; min-width: 250px;">
+        <div class="proj-section-label" style="color: var(--green);">// משוב וחוות דעת</div>
+        <p style="font-size: 1.1rem; font-style: italic; color: rgba(232, 244, 248, 0.9); margin-bottom: 0;">
+          "SwipeLab פותרת צוואר בקבוק קריטי במחקר אקולוגי. גישת הגיימיפיקציה הופכת את המדע האזרחי לנגיש ואפקטיבי, ומאפשרת לנו לעבד מידע בהיקפים חסרי תקדים."
+        </p>
+        <div style="margin-top: 16px; display: flex; flex-direction: column;">
+          <strong style="color: var(--white); font-family: 'Heebo', sans-serif;">פרופ' חן קיסר</strong>
+          <span style="font-family: 'Heebo', sans-serif; font-size: 0.85rem; color: var(--dim);">פרופסור חבר, אוניברסיטת בן-גוריון (לקוח הפרויקט)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scale & Stats -->
+    <div class="role-grid" style="margin-top: 24px;">
+      <div class="role-cell">
+        <div class="role-cell-label">משתמשים</div>
+        <div class="role-cell-value">30+ חוקרים פעילים</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-cell-label">היקף נתונים</div>
+        <div class="role-cell-value">380K+ תמונות חרקים</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-cell-label">פריסה</div>
+        <div class="role-cell-value">84 אתרים אקולוגיים</div>
+      </div>
+      <div class="role-cell">
+        <div class="role-cell-label">ארכיטקטורה</div>
+        <div class="role-cell-value">REST API & Microservices</div>
+      </div>
+    </div>
+
+    <div class="proj-footer" aria-label="ניווט בין פרויקטים">
+      <a href="../../kanban-system/he/" class="proj-nav-btn proj-nav-prev proj-nav-with-icon">
+        <img src="../../kanban-system/icon.svg" alt="" class="proj-nav-icon">
+        <span class="proj-nav-text">
+          <span class="proj-nav-label">→ הפרויקט הקודם</span>
+          <span class="proj-nav-title">Kanban System</span>
+        </span>
+      </a>
+      <a href="../../../he/#projects" class="proj-nav-btn proj-nav-back">
+        <span class="proj-nav-label">↗ חזרה לקטגוריה</span>
+        <span class="proj-nav-title">פרויקטים נבחרים</span>
+      </a>
+      <a href="../../jobpilot-application-tracker/he/" class="proj-nav-btn proj-nav-next proj-nav-with-icon">
+        <img src="../../jobpilot-application-tracker/icon.ico" alt="" class="proj-nav-icon">
+        <span class="proj-nav-text">
+          <span class="proj-nav-label">הפרויקט הבא ←</span>
+          <span class="proj-nav-title">JobPilot</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Media Loading Animation
+    document.querySelectorAll('video, img').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('loadeddata', () => loader.classList.add('hidden'));
+      } else if (media.tagName === 'IMG') {
+        if (media.complete) {
+          loader.classList.add('hidden');
+        } else {
+          media.addEventListener('load', () => loader.classList.add('hidden'));
+        }
+      }
+    });
+  
+    // Mobile Nav Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth Language Switch Crossfade
+    (function initLangFade() {
+      const enLangBtn = document.querySelector('.lang-btn[data-lang="en"]');
+      const heLangBtn = document.querySelector('.lang-btn[data-lang="he"]');
+      const langSwitch = document.getElementById('langSwitch');
+      const isHebrew = document.documentElement.lang === 'he';
+      const targetBtn = isHebrew ? enLangBtn : heLangBtn;
+      const currentBtn = isHebrew ? heLangBtn : enLangBtn;
+      const targetLang = isHebrew ? 'en' : 'he';
+      let isSwitching = false;
+
+      if (sessionStorage.getItem('lang_fade') === 'true') {
+        sessionStorage.removeItem('lang_fade');
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('lang-fade-entering');
+          document.body.classList.add('lang-fade-in');
+          setTimeout(() => {
+            document.body.classList.remove('lang-fade-in');
+          }, 250);
+        });
+      } else {
+        document.documentElement.classList.remove('lang-fade-entering');
+      }
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+      }, 500);
+
+      if (targetBtn) {
+        targetBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (isSwitching) return;
+          isSwitching = true;
+
+          if (langSwitch) langSwitch.classList.add('switching');
+          if (currentBtn) currentBtn.classList.remove('active');
+          targetBtn.classList.add('active');
+
+          const targetUrl = (targetBtn.getAttribute('href') || (isHebrew ? '../' : 'he/')) + (window.location.hash || '');
+
+          sessionStorage.setItem('lang_fade', 'true');
+          try { localStorage.setItem('preferred_lang', targetLang); } catch (err) {}
+
+          document.body.classList.add('lang-fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 180);
+        });
+      }
+
+      window.addEventListener('pageshow', () => {
+        isSwitching = false;
+        sessionStorage.removeItem('lang_fade');
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+        document.body.classList.remove('lang-fade-in');
+        if (langSwitch) langSwitch.classList.remove('switching');
+        if (currentBtn) currentBtn.classList.add('active');
+        if (targetBtn) targetBtn.classList.remove('active');
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () { try { if (sessionStorage.getItem('lang_fade') === 'true') { document.documentElement.classList.add('lang-fade-entering'); } } catch (e) { } })();
+  </script>
   <base href="/games/job-hunt-hero/">
   <title>JOB HUNT HERO</title>
 
@@ -24,6 +27,7 @@
       --green: #00ff88;
       --white: #e8f4f8;
       --dim: #4a7a8a;
+      --border: rgba(0, 245, 255, 0.15);
     }
 
     *,
@@ -36,6 +40,8 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: clip;
+      max-width: 100%;
     }
 
     /* Override the color-shooter.css body rules to allow scrolling and normal layout */
@@ -47,7 +53,8 @@
       align-items: initial !important;
       justify-content: initial !important;
       min-height: 100vh;
-      overflow-x: hidden !important;
+      max-width: 100%;
+      overflow-x: clip !important;
       overflow-y: auto !important;
       cursor: none;
     }
@@ -121,8 +128,57 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 60px;
-      background: linear-gradient(to bottom, rgba(2, 10, 15, 0.95), transparent);
-      backdrop-filter: blur(4px);
+      background: rgba(2, 10, 15, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 245, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-socials {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(0, 245, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--dim);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-social-btn:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+      background: rgba(0, 245, 255, 0.12);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .nav-social-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-social-btn:hover svg {
+      transform: scale(1.1);
     }
 
     .nav-logo {
@@ -138,6 +194,8 @@
       display: flex;
       gap: 40px;
       list-style: none;
+      margin-left: auto;
+      margin-right: 32px;
     }
 
     .nav-links a {
@@ -173,6 +231,132 @@
     .nav-links a:hover::after,
     .nav-links a.active::after {
       transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 602;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 245, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 6px;
+      gap: 4px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      z-index: 601;
+    }
+
+    .lang-switch:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.25);
+    }
+
+    .lang-switch.switching {
+      border-color: var(--cyan) !important;
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.6), inset 0 0 8px rgba(0, 245, 255, 0.3) !important;
+      transform: scale(1.05);
+    }
+
+    .lang-btn,
+    .lang-btn:visited {
+      color: var(--dim);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lang-btn:hover {
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    .lang-btn.active,
+    .lang-btn.active:visited {
+      color: var(--bg) !important;
+      background: var(--cyan) !important;
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+      pointer-events: none;
+      transform: none;
+    }
+
+    .lang-divider {
+      color: rgba(0, 245, 255, 0.3);
+      font-size: 0.7rem;
+      user-select: none;
+    }
+
+    body.lang-fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.18s ease-out !important;
+    }
+
+    html.lang-fade-entering body {
+      opacity: 0 !important;
+    }
+
+    body.lang-fade-in {
+      opacity: 1 !important;
+      transition: opacity 0.22s ease-in !important;
+    }
+
+    /* Tablet / landscape-phone tier: full nav, tighter spacing */
+    @media (min-width: 769px) and (max-width: 1100px) {
+      nav {
+        padding: 14px 4vw;
+      }
+
+      .nav-brand {
+        flex-shrink: 0;
+      }
+
+      .nav-links {
+        gap: clamp(14px, 2.2vw, 28px);
+        margin-right: 16px;
+        padding-left: 24px;
+      }
+
+      .nav-links a {
+        font-size: 0.7rem;
+        letter-spacing: 1.2px;
+      }
+
+      .nav-actions {
+        gap: 12px;
+      }
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 600;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: var(--cyan);
+      transition: 0.3s;
     }
 
     /* FOOTER */
@@ -293,9 +477,10 @@
     }
 
     .mg-banner-current {
-      width: 64px;
-      height: 96px;
+      width: 48px;
+      height: 48px;
       border: 1px solid var(--cyan);
+      border-radius: 4px;
       flex-shrink: 0;
     }
 
@@ -391,58 +576,172 @@
       letter-spacing: 1px;
     }
 
-    @media (max-width: 1200px) {
-      .game-content-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-      }
-
-      .side-panel {
-        width: 100%;
-        max-width: 520px;
-      }
-    }
-
     /* Small tweaks for game UI inside the new wrapper */
     #title-bar {
       display: none !important;
     }
 
+    #game-stage {
+      position: relative;
+      display: block;
+      flex-shrink: 0;
+    }
+
     /* Hide the old title bar inside the box, we have a nicer one outside */
     #game-wrapper {
+      position: relative;
       cursor: auto;
-      transform-origin: top center;
+      transform-origin: top left;
+      width: 520px;
     }
 
-    /* Reveal standard system mouse when inside the game component */
+    @media (max-width: 1200px) {
+      .game-content-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "cabinet cabinet"
+          "left right";
+        gap: 24px;
+        max-width: 1000px;
+        padding: 0 4vw;
+      }
 
-    /* Dynamically scale the ENTIRE game unit proportionally on smaller screens so the menus scale with it */
-    @media (max-height: 900px) {
-      #game-wrapper {
-        zoom: 0.85;
+      #game-stage {
+        grid-area: cabinet;
+        justify-self: center;
+      }
+
+      .left-panel {
+        grid-area: left;
+        width: 100%;
+      }
+
+      .right-panel {
+        grid-area: right;
+        width: 100%;
       }
     }
 
-    @media (max-height: 750px) {
-      #game-wrapper {
-        zoom: 0.7;
-      }
-    }
+    /* Hide custom cursor on all mobile / touch / landscape-phone viewports */
+    @media (max-width: 768px),
+    (max-height: 550px),
+    (hover: none),
+    (pointer: coarse) {
 
-    @media (max-height: 600px) {
-      #game-wrapper {
-        zoom: 0.55;
+      .cursor,
+      .cursor-ring {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto !important;
       }
     }
 
     @media (max-width: 768px) {
+      .game-content-row {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "cabinet"
+          "left"
+          "right";
+        padding: 0 4vw;
+      }
+
+      .game-wrapper-section {
+        padding-top: 80px;
+      }
+
       nav {
-        padding: 16px 24px;
+        padding: 12px 6vw;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-brand {
+        gap: 10px;
+      }
+
+      .nav-socials {
+        gap: 6px;
+      }
+
+      .nav-social-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+      }
+
+      .nav-social-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .nav-actions {
+        gap: 14px;
+      }
+
+      .lang-switch {
+        padding: 2px 4px;
+        font-size: 0.7rem;
+      }
+
+      .lang-btn {
+        padding: 2px 6px;
       }
 
       .nav-links {
-        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 499;
+        margin: 0;
+        background: rgba(2, 10, 15, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(0, 245, 255, 0.15);
+        flex-direction: column;
+        gap: 24px;
+        padding: 30px 24px;
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+        pointer-events: none;
+        transition: clip-path 0.4s ease, opacity 0.3s ease;
+      }
+
+      .nav-links.active {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links li {
+        transform: translateY(-16px);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.active li {
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+      }
+
+      .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translateY(9px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-9px);
       }
     }
 
@@ -497,6 +796,7 @@
       from {
         transform: rotate(0deg);
       }
+
       to {
         transform: rotate(360deg);
       }
@@ -515,9 +815,12 @@
     }
 
     @keyframes pulse {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: 0.4;
       }
+
       50% {
         opacity: 0.8;
       }
@@ -535,16 +838,44 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <nav>
-    <div class="nav-logo">SE</div>
-    <ul class="nav-links">
-      <!-- <li><a href="#about">About</a></li> -->
-       <li><a href="../../#skills">Skills</a></li>
+    <div class="nav-brand">
+      <a href="../../" class="nav-logo" style="text-decoration:none;">SE</a>
+      <div class="nav-socials">
+        <a href="http://github.com/SagiEv/" target="_blank" rel="noopener noreferrer" class="nav-social-btn"
+          title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/sagi-evroni" target="_blank" rel="noopener noreferrer" class="nav-social-btn"
+          title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74v-8.37H5.06v8.37h2.8z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
       <li><a href="../../#projects">Projects</a></li>
       <li><a href="../../#games">Games</a></li>
       <li><a href="../../#automation">Automation</a></li>
       <li><a href="../../#explorations">Explorations</a></li>
       <li><a href="../../#contact">Contact</a></li>
     </ul>
+    <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch" aria-label="Language Selector">
+        <a href="index.html" class="lang-btn active" data-lang="en">EN</a>
+        <span class="lang-divider">/</span>
+        <a href="he/index.html" class="lang-btn" data-lang="he">עב</a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
   </nav>
 
   <!-- GAME SECTION -->
@@ -569,13 +900,18 @@
           </div>
         </a>
 
-        <div class="more-game-card coming-soon">
-          <div class="mg-plus">+</div>
-          <div class="mg-info">
-            <div class="mg-title">LOCKED SLOT</div>
-            <div class="mg-status">COMING SOON</div>
+        <!-- Grand Theft Animal -->
+        <a href="../grand-theft-animal/index.html" class="more-game-card">
+          <div
+            style="background: url('../grand-theft-animal/apple-touch-icon.png') center/cover; width: 48px; height: 48px; border: 1px solid var(--cyan); border-radius: 4px; flex-shrink: 0;">
           </div>
-        </div>
+          <div class="mg-info">
+            <div class="mg-title">GRAND THEFT ANIMAL</div>
+            <div class="mg-status" style="color: var(--green);">AVAILABLE</div>
+            <div class="mg-game-description">High-octane GTA-style animal runner. Outrun the law and survive the
+              streets!</div>
+          </div>
+        </a>
 
         <div class="more-game-card coming-soon">
           <div class="mg-plus">+</div>
@@ -587,35 +923,37 @@
       </div>
 
       <!-- Original Game DOM -->
-      <div id="game-wrapper">
-        <div class="media-loader" id="gameLoader">
-          <div style="display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;">
-            <div class="loader-spinner"></div>
-            <div class="loader-text">INITIALIZING...</div>
+      <div id="game-stage">
+        <div id="game-wrapper">
+          <div class="media-loader" id="gameLoader">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;">
+              <div class="loader-spinner"></div>
+              <div class="loader-text">INITIALIZING...</div>
+            </div>
           </div>
-      </div>
-        <div id="title-bar">◈ JOB HUNT HERO ◈</div>
-        <canvas id="game-canvas" width="520" height="580"></canvas>
-        <div id="hud">
-          <div class="hud-block">
-            <span class="hud-label">Level</span>
-            <span class="hud-val" id="hud-level">1</span>
-          </div>
-          <div class="hud-block">
-            <span class="hud-label">Score</span>
-            <span class="hud-val" id="hud-score">0</span>
-          </div>
-          <div class="hud-block">
-            <span class="hud-label">Lives</span>
-            <div id="hearts-display">❤️❤️❤️</div>
-          </div>
-          <div class="hud-block">
-            <span class="hud-label">Mismatches</span>
-            <span class="hud-val" id="hud-mismatches">0</span>
-          </div>
-          <div class="hud-block">
-            <span class="hud-label">Time</span>
-            <span class="hud-val" id="hud-time">0s</span>
+          <div id="title-bar">◈ JOB HUNT HERO ◈</div>
+          <canvas id="game-canvas" width="520" height="580"></canvas>
+          <div id="hud">
+            <div class="hud-block">
+              <span class="hud-label">Level</span>
+              <span class="hud-val" id="hud-level">1</span>
+            </div>
+            <div class="hud-block">
+              <span class="hud-label">Score</span>
+              <span class="hud-val" id="hud-score">0</span>
+            </div>
+            <div class="hud-block">
+              <span class="hud-label">Lives</span>
+              <div id="hearts-display">❤️❤️❤️</div>
+            </div>
+            <div class="hud-block">
+              <span class="hud-label">Mismatches</span>
+              <span class="hud-val" id="hud-mismatches">0</span>
+            </div>
+            <div class="hud-block">
+              <span class="hud-label">Time</span>
+              <span class="hud-val" id="hud-time">0s</span>
+            </div>
           </div>
         </div>
       </div>
@@ -639,7 +977,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-copy">© 2025 SAGI EVRONI — ALL SYSTEMS OPERATIONAL</div>
+    <div class="footer-copy">© 2026 SAGI EVRONI — ALL SYSTEMS OPERATIONAL</div>
     <div class="footer-logo">SE_v1.0</div>
   </footer>
 
@@ -658,6 +996,7 @@
     animCursor();
 
     // Hide custom cursor over game canvas area to not interfere with game crosshair
+    const gameStage = document.getElementById('game-stage');
     const gameWrapper = document.getElementById('game-wrapper');
     gameWrapper.addEventListener('mouseenter', () => {
       cursor.style.display = 'none';
@@ -667,6 +1006,34 @@
       cursor.style.display = 'block';
       ring.style.display = 'block';
     });
+
+    // Scale the 520px game unit to fit narrow viewports and short heights without overflow
+    const gameCanvasEl = document.getElementById('game-canvas');
+    const gameHudEl = document.getElementById('hud');
+    function fitGame() {
+      if (!gameWrapper || !gameStage) return;
+      const baseW = 520;
+      const baseH = (gameCanvasEl ? gameCanvasEl.offsetHeight : 580) + (gameHudEl ? gameHudEl.offsetHeight : 34);
+      const vw = document.documentElement.clientWidth || window.innerWidth;
+      const vh = window.innerHeight;
+      const availW = Math.max(200, vw - 32);
+      const scaleW = availW / baseW;
+      let scaleH = 1;
+      if (vw > 768) {
+        if (vh <= 600) scaleH = 0.7;
+        else if (vh <= 750) scaleH = 0.78;
+        else if (vh <= 900) scaleH = 0.85;
+      }
+      const s = Math.min(1, scaleW, scaleH);
+      gameWrapper.style.transform = s < 0.999 ? `scale(${s})` : 'none';
+      gameStage.style.width = Math.round(baseW * s) + 'px';
+      gameStage.style.height = Math.round(baseH * s) + 'px';
+    }
+    window.addEventListener('resize', fitGame);
+    window.addEventListener('orientationchange', () => setTimeout(fitGame, 150));
+    window.addEventListener('load', fitGame);
+    window.addEventListener('gameReady', fitGame);
+    fitGame();
 
     const gameLoader = document.getElementById('gameLoader');
 
@@ -678,6 +1045,85 @@
 
     // Fallback: hide after 8s no matter what
     setTimeout(() => gameLoader.classList.add('hidden'), 8000);
+
+    // Mobile Nav Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth Language Switch Crossfade
+    (function initLangFade() {
+      const enLangBtn = document.querySelector('.lang-btn[data-lang="en"]');
+      const heLangBtn = document.querySelector('.lang-btn[data-lang="he"]');
+      const langSwitch = document.getElementById('langSwitch');
+      const isHebrew = document.documentElement.lang === 'he';
+      const targetBtn = isHebrew ? enLangBtn : heLangBtn;
+      const currentBtn = isHebrew ? heLangBtn : enLangBtn;
+      const targetLang = isHebrew ? 'en' : 'he';
+      let isSwitching = false;
+
+      if (sessionStorage.getItem('lang_fade') === 'true') {
+        sessionStorage.removeItem('lang_fade');
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('lang-fade-entering');
+          document.body.classList.add('lang-fade-in');
+          setTimeout(() => {
+            document.body.classList.remove('lang-fade-in');
+          }, 250);
+        });
+      } else {
+        document.documentElement.classList.remove('lang-fade-entering');
+      }
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+      }, 500);
+
+      if (targetBtn) {
+        targetBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (isSwitching) return;
+          isSwitching = true;
+
+          if (langSwitch) langSwitch.classList.add('switching');
+          if (currentBtn) currentBtn.classList.remove('active');
+          targetBtn.classList.add('active');
+
+          const targetUrl = targetBtn.href || (isHebrew ? '../' : 'he/');
+
+          sessionStorage.setItem('lang_fade', 'true');
+          try { localStorage.setItem('preferred_lang', targetLang); } catch (err) { }
+
+          document.body.classList.add('lang-fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 180);
+        });
+      }
+
+      window.addEventListener('pageshow', () => {
+        isSwitching = false;
+        sessionStorage.removeItem('lang_fade');
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+        document.body.classList.remove('lang-fade-in');
+        if (langSwitch) langSwitch.classList.remove('switching');
+        if (currentBtn) currentBtn.classList.add('active');
+        if (targetBtn) targetBtn.classList.remove('active');
+      });
+    })();
   </script>
 
   <script type="module" src="js/main.js"></script>

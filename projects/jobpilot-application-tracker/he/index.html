@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () { try { if (sessionStorage.getItem('lang_fade') === 'true') { document.documentElement.classList.add('lang-fade-entering'); } } catch (e) { } })();
+  </script>
+  <title>JobPilot — מרכז שליטה לקריירה — שגיא עברוני</title>
+  <link rel="stylesheet" href="../../shared/project.css?v=9">
+  <style>
+    .video-label {
+      right: 12px;
+      left: auto;
+      font-family: 'Share Tech Mono', 'Heebo', monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-bg"></div>
+  <nav>
+    <div class="nav-brand">
+      <a href="../../../he/" class="nav-logo">SE</a>
+      <div class="nav-socials">
+        <a href="http://github.com/SagiEv/" target="_blank" rel="noopener noreferrer" class="nav-social-btn"
+          title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/sagi-evroni" target="_blank" rel="noopener noreferrer" class="nav-social-btn"
+          title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74v-8.37H5.06v8.37h2.8z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../../he/#projects">פרויקטים</a></li>
+      <li><a href="../../../he/#games">משחקים</a></li>
+      <li><a href="../../../he/#automation">אוטומציה</a></li>
+      <li><a href="../../../he/#explorations">מחקר ופיתוח</a></li>
+      <li><a href="../../../he/#contact">צור קשר</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch" aria-label="בורר שפה">
+        <a href="../" class="lang-btn" data-lang="en">EN</a>
+        <span class="lang-divider">/</span>
+        <a href="./" class="lang-btn active" data-lang="he">עב</a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="proj-num">// PROJECT_02</div>
+    <h1 class="proj-title">
+      <img src="../icon.ico" alt="JobPilot Icon"
+        style="width: 48px; height: 48px; vertical-align: middle; margin-left: 12px; border-radius: 8px;">
+      JobPilot
+    </h1>
+    <p class="proj-tagline">// מרכז שליטה לניהול קריירה · React · FastAPI · סוכני AI</p>
+
+    <!-- Main Highlight Media -->
+    <div class="proj-media">
+      <div class="media-loader" data-media="main-video" style="position: absolute; inset: 0;">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
+      </div>
+      <video id="main-video" src="../general.mp4" autoplay loop muted playsinline
+        onloadstart="document.querySelector('[data-media=main-video]').classList.remove('hidden');"
+        oncanplay="document.querySelector('[data-media=main-video]').classList.add('hidden');">
+      </video>
+    </div>
+
+    <!-- Meta / Tech Stack -->
+    <div class="proj-meta" style="border-bottom:none; margin-bottom: 24px;">
+      <div class="stack-pills">
+        <a href="https://github.com/SagiEv/JobPilot" class="github-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+          צפייה ב-GitHub
+        </a>
+        <span class="stack-pill">React</span>
+        <span class="stack-pill">Node.js</span>
+        <span class="stack-pill">FastAPI</span>
+        <span class="stack-pill">LangChain</span>
+        <span class="stack-pill">Supabase</span>
+        <span class="stack-pill">Groq LLM</span>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="proj-section">
+      <div class="proj-section-label">// סקירת מערכת</div>
+      <p><strong>JobPilot</strong> הוא מרכז שליטה ופלטפורמת Full-Stack לניהול קריירה, שתוכנן במיוחד כדי לייעל ולפשט את
+        תהליך חיפוש העבודה המודרני. המערכת משמשת כפלטפורמה מרכזית למעקב אחר מועמדויות עבודה, ניהול רשת קשרים מקצועית,
+        ואוטומציה של משימות מורכבות כגון סריקת רשת (Web Scraping) לאיתור משרות חדשות.</p>
+      <p>נבנה בארכיטקטורת Dual-Backend מפוצלת, המשלבת שרת <strong>Node.js / Express</strong> רספונסיבי לניהול הנתונים
+        והמשתמשים לצד שירות <strong>Python FastAPI</strong> ייעודי המניע יכולות AI מתקדמות באמצעות
+        <strong>LangChain</strong> ו-<strong>Groq</strong>.</p>
+    </div>
+
+    <!-- AI CV Tailoring Feature -->
+    <div class="proj-section" style="border: none; background: transparent; padding: 0;">
+      <div class="proj-section-label">// מנוע ה-AI של LangGraph</div>
+      <h3>התאמה אוטומטית של קורות חיים (Automated CV Tailoring)</h3>
+      <p style="margin-bottom: 20px;">המערכת מפעילה פייפליין AI מתקדם המבוסס על סוכני LangGraph להתאמה אוטומטית של קורות
+        החיים לתיאור משרה ספציפי. הבינה המלאכותית מפענחת את נתוני הפרופיל או קובץ PDF שהועלה, ממפה אותם לסכמה התקנית של
+        <span class="code-span">JSON Resume</span>, ומייצרת בזמן אמת קובצי PDF של עמוד אחד בגודל A4 באמצעות דפדפן
+        Headless (Puppeteer).</p>
+
+      <div class="proj-media">
+        <video src="../CV_JsonResume_Feature.mp4" autoplay loop muted playsinline></video>
+      </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="proj-section-label">// הדגמת פיצ'רים</div>
+    <div class="proj-media-grid">
+      <!-- Applications Tracker -->
+      <div class="video-item">
+        <div class="video-label">Application Tracker</div>
+        <video src="../applications.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>תעדו כל משרה שהגשתם אליה, עדכנו סטטוס ושמרו הערות משיחות סינון וראיונות – הכול במקום אחד.</p>
+        </div>
+      </div>
+
+      <!-- Interview Insights -->
+      <div class="video-item">
+        <div class="video-label">Interview Insights</div>
+        <video src="../interview_insights.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>תעדו את הראיונות שלכם והפיקו דוח AI שמזהה דפוסים – מה לשמר ומה לשפר.</p>
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div class="video-item">
+        <div class="video-label">Analytics Dashboard</div>
+        <video src="../analytics.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>צפו במספרים שמאחורי חיפוש העבודה – סטטיסטיקות, אחוזי המרה ומגמות לאורך זמן.</p>
+        </div>
+      </div>
+
+      <!-- Network Edge -->
+      <div class="video-item">
+        <div class="video-label">Network Edge</div>
+        <video src="../network_edge.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>נהלו אנשי קשר בתעשייה שיכולים לעזור – פרטי קשר, החברה שבה הם עובדים וקיצור דרך לעמוד המשרות שלה.</p>
+        </div>
+      </div>
+
+      <!-- Auto Search -->
+      <div class="video-item">
+        <div class="video-label">Auto Search</div>
+        <video src="../auto_search.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>הוסיפו חברות שמעניינות אתכם והמערכת תסרוק אותן מעת לעת לאיתור משרות חדשות ורלוונטיות.</p>
+        </div>
+      </div>
+
+      <!-- Email Auto-Status -->
+      <div class="video-item">
+        <div class="video-label">Email Auto-Status</div>
+        <video src="../dashboard.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>חברו את תיבת המייל כדי לעדכן סטטוס מועמדויות אוטומטית ולקבל התראות – בלי לפספס אף תשובה.</p>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="video-item">
+        <div class="video-label">Skills Management</div>
+        <video src="../skills.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>רשמו את הכישורים שלכם פעם אחת – הם משמשים להתאמת קורות החיים ולחישוב התאמה לכל משרה.</p>
+        </div>
+      </div>
+
+      <!-- Portfolio -->
+      <div class="video-item">
+        <div class="video-label">Portfolio</div>
+        <video src="../portfolio.mp4" autoplay loop muted playsinline></video>
+        <button class="video-info" type="button" aria-label="על הפיצ'ר">i</button>
+        <div class="video-info-overlay">
+          <p>הוסיפו את הפרויקטים שלכם – מנוע התאמת קורות החיים יבחר את המתאימים ביותר לכל משרה.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Details -->
+    <div class="proj-section">
+      <div class="proj-section-label">// ארכיטקטורה ופייפליין נתונים</div>
+      <h3>מורכבות טכנולוגית</h3>
+      <ul class="feature-list">
+        <li><strong>ארכיטקטורת מיקרו-סרוויסים (Dual-Backend):</strong> הפרדת תחומי האחריות בין שרת API ב-Node.js (ניהול
+          נתוני משתמש ואימות מול Supabase) לבין שירות FastAPI ב-Python המותאם במיוחד למשימות עיבוד כבדות של AI.</li>
+        <li><strong>סוכני בינה מלאכותית (Agentic AI Workflows):</strong> מימוש LangChain ו-LangGraph ליצירת סוכנים
+          רציפים המקבלים החלטות אוטונומיות, מחלצים ישויות מקורות החיים ומשכתבים הישגים והדגשים מקצועיים בהתאמה מדויקת
+          לדרישות המשרה.</li>
+        <li><strong>פייפליין הפקת PDF דינמי:</strong> המרת עורך הטקסט העשיר (Quill) לסכמת JSON Resume מובנית וקפדנית,
+          רינדור באמצעות תבניות SSR ב-EJS/React, וייצוא לקובץ PDF סופי באמצעות Puppeteer על גבי Chromium Headless.</li>
+      </ul>
+    </div>
+
+    <div class="proj-footer" aria-label="ניווט בין פרויקטים">
+      <a href="../../swipelab-app/he/" class="proj-nav-btn proj-nav-prev proj-nav-with-icon">
+        <img src="../../swipelab-app/icon.png" alt="" class="proj-nav-icon">
+        <span class="proj-nav-text">
+          <span class="proj-nav-label">→ הפרויקט הקודם</span>
+          <span class="proj-nav-title">SwipeLab App</span>
+        </span>
+      </a>
+      <a href="../../../he/#projects" class="proj-nav-btn proj-nav-back">
+        <span class="proj-nav-label">↗ חזרה לקטגוריה</span>
+        <span class="proj-nav-title">פרויקטים נבחרים</span>
+      </a>
+      <a href="../../market-web-app/he/" class="proj-nav-btn proj-nav-next proj-nav-with-icon">
+        <img src="../../market-web-app/icon.svg" alt="" class="proj-nav-icon">
+        <span class="proj-nav-text">
+          <span class="proj-nav-label">הפרויקט הבא ←</span>
+          <span class="proj-nav-title">Market Web App</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Feature info overlay: tap/click toggle (touch devices have no hover)
+    document.querySelectorAll('.video-info').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const item = btn.closest('.video-item');
+        const wasOpen = item.classList.contains('info-open');
+        document.querySelectorAll('.video-item.info-open').forEach(el => el.classList.remove('info-open'));
+        if (!wasOpen) item.classList.add('info-open');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.video-item.info-open').forEach(el => el.classList.remove('info-open'));
+    });
+
+    // Disable right-click on videos to prevent easy downloading
+    document.querySelectorAll('video').forEach(video => {
+      video.addEventListener('contextmenu', e => e.preventDefault());
+    });
+
+    // Media Loading Animation
+    document.querySelectorAll('video, img, iframe').forEach(media => {
+      const loader = document.querySelector(`[data-media="${media.id}"]`);
+      if (!loader) return;
+
+      if (media.tagName === 'VIDEO') {
+        media.addEventListener('canplay', () => {
+          loader.classList.add('hidden');
+        });
+        media.addEventListener('loadstart', () => {
+          loader.classList.remove('hidden');
+        });
+      }
+    });
+
+    // Mobile Nav Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth Language Switch Crossfade
+    (function initLangFade() {
+      const enLangBtn = document.querySelector('.lang-btn[data-lang="en"]');
+      const heLangBtn = document.querySelector('.lang-btn[data-lang="he"]');
+      const langSwitch = document.getElementById('langSwitch');
+      const isHebrew = document.documentElement.lang === 'he';
+      const targetBtn = isHebrew ? enLangBtn : heLangBtn;
+      const currentBtn = isHebrew ? heLangBtn : enLangBtn;
+      const targetLang = isHebrew ? 'en' : 'he';
+      let isSwitching = false;
+
+      if (sessionStorage.getItem('lang_fade') === 'true') {
+        sessionStorage.removeItem('lang_fade');
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('lang-fade-entering');
+          document.body.classList.add('lang-fade-in');
+          setTimeout(() => {
+            document.body.classList.remove('lang-fade-in');
+          }, 250);
+        });
+      } else {
+        document.documentElement.classList.remove('lang-fade-entering');
+      }
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+      }, 500);
+
+      if (targetBtn) {
+        targetBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (isSwitching) return;
+          isSwitching = true;
+
+          if (langSwitch) langSwitch.classList.add('switching');
+          if (currentBtn) currentBtn.classList.remove('active');
+          targetBtn.classList.add('active');
+
+          const targetUrl = (targetBtn.getAttribute('href') || (isHebrew ? '../' : 'he/')) + (window.location.hash || '');
+
+          sessionStorage.setItem('lang_fade', 'true');
+          try { localStorage.setItem('preferred_lang', targetLang); } catch (err) { }
+
+          document.body.classList.add('lang-fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 180);
+        });
+      }
+
+      window.addEventListener('pageshow', () => {
+        isSwitching = false;
+        sessionStorage.removeItem('lang_fade');
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+        document.body.classList.remove('lang-fade-in');
+        if (langSwitch) langSwitch.classList.remove('switching');
+        if (currentBtn) currentBtn.classList.add('active');
+        if (targetBtn) targetBtn.classList.remove('active');
+      });
+    })();
+  </script>
+</body>
+
+</html>

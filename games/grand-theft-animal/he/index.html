@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () { try { if (sessionStorage.getItem('lang_fade') === 'true') { document.documentElement.classList.add('lang-fade-entering'); } } catch (e) { } })();
+  </script>
+  <title>GRAND THEFT ANIMAL</title>
+
+  <!-- Favicon & Touch Icon -->
+  <link rel="icon" type="image/png" href="../apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <!-- Global site fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #020a0f;
+      --bg2: #040e15;
+      --cyan: #00f5ff;
+      --cyan2: #00bcd4;
+      --green: #00ff88;
+      --orange: #ff6b00;
+      --white: #e8f4f8;
+      --dim: #4a7a8a;
+      --panel: rgba(0, 245, 255, 0.03);
+      --border: rgba(0, 245, 255, 0.15);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Heebo', 'Rajdhani', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      cursor: none;
+    }
+
+    /* SCANLINES */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 4px);
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* GRID BG */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes gridPulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, background 0.2s;
+      mix-blend-mode: screen;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+      opacity: 0.5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 60px;
+      background: rgba(2, 10, 15, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 245, 255, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-socials {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(0, 245, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--dim);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-social-btn:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+      background: rgba(0, 245, 255, 0.12);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .nav-social-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-social-btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--cyan);
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px var(--cyan);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+      margin-right: auto;
+      margin-left: 32px;
+    }
+
+    .nav-links a {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      font-size: 0.85rem;
+      color: var(--dim);
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      position: relative;
+      cursor: none;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cyan);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 602;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 245, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 6px;
+      gap: 4px;
+      font-family: 'Share Tech Mono', 'Heebo', monospace;
+      font-size: 0.75rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      z-index: 601;
+    }
+
+    .lang-switch:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.25);
+    }
+
+    .lang-switch.switching {
+      border-color: var(--cyan) !important;
+      box-shadow: 0 0 16px rgba(0, 245, 255, 0.6), inset 0 0 8px rgba(0, 245, 255, 0.3) !important;
+      transform: scale(1.05);
+    }
+
+    .lang-btn,
+    .lang-btn:visited {
+      color: var(--dim);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lang-btn:hover {
+      color: var(--white);
+      transform: scale(1.05);
+    }
+
+    .lang-btn.active,
+    .lang-btn.active:visited {
+      color: var(--bg) !important;
+      background: var(--cyan) !important;
+      box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+      pointer-events: none;
+      transform: none;
+    }
+
+    .lang-divider {
+      color: rgba(0, 245, 255, 0.3);
+      font-size: 0.7rem;
+      user-select: none;
+    }
+
+    body.lang-fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.18s ease-out !important;
+    }
+
+    html.lang-fade-entering body {
+      opacity: 0 !important;
+    }
+
+    body.lang-fade-in {
+      opacity: 1 !important;
+      transition: opacity 0.22s ease-in !important;
+    }
+
+    /* Tablet / landscape-phone tier: full nav, tighter spacing */
+    @media (min-width: 769px) and (max-width: 1100px) {
+      nav {
+        padding: 14px 4vw;
+      }
+
+      .nav-brand {
+        flex-shrink: 0;
+      }
+
+      .nav-links {
+        gap: clamp(14px, 2.2vw, 28px);
+        margin-left: 16px;
+        padding-right: 24px;
+      }
+
+      .nav-links a {
+        font-size: 0.78rem;
+        letter-spacing: 0.5px;
+      }
+
+      .nav-actions {
+        gap: 12px;
+      }
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 600;
+    }
+
+    .nav-toggle span {
+      width: 26px;
+      height: 2px;
+      background: var(--cyan);
+      transition: 0.3s;
+    }
+
+    /* GAME CONTAINER WRAPPER (MATCHING JOB HUNT HERO) */
+    .game-wrapper-section {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      padding-top: 75px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .game-header {
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .game-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      color: var(--white);
+      text-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+      letter-spacing: 4px;
+    }
+
+    .game-desc {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      color: var(--cyan);
+      font-size: 0.85rem;
+      margin-top: 2px;
+      letter-spacing: 1px;
+    }
+
+    /* MAIN CONTENT 3-COLUMN ROW */
+    .game-content-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 30px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      transition: all 0.3s ease;
+    }
+
+    /* THEATER / WIDE 16:9 MODE */
+    .game-content-row.theater-mode {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "cabinet cabinet"
+        "left right";
+      gap: 30px;
+      max-width: 1240px;
+    }
+
+    .game-content-row.theater-mode .game-cabinet {
+      grid-area: cabinet;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .game-content-row.theater-mode .iframe-viewport {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+
+    .game-content-row.theater-mode .left-panel {
+      grid-area: left;
+      width: 100%;
+    }
+
+    .game-content-row.theater-mode .right-panel {
+      grid-area: right;
+      width: 100%;
+    }
+
+    /* SIDE PANELS (MATCHING JOB HUNT HERO) */
+    .side-panel {
+      background: rgba(0, 245, 255, 0.02);
+      border: 1px solid rgba(0, 245, 255, 0.15);
+      padding: 24px;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 0.4s ease;
+      cursor: none;
+    }
+
+    .side-panel:hover {
+      background: rgba(0, 245, 255, 0.05);
+      border-color: rgba(0, 245, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 245, 255, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .dev-title {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      color: var(--cyan);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .dev-desc {
+      font-family: 'Heebo', 'Rajdhani', sans-serif;
+      font-size: 0.92rem;
+      color: rgba(232, 244, 248, 0.65);
+      line-height: 1.65;
+    }
+
+    .dev-subtitle {
+      font-family: 'Heebo', 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .dev-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      direction: ltr;
+    }
+
+    .dev-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      padding: 4px 10px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* CONTROLS LIST */
+    .controls-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .control-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      background: rgba(0, 245, 255, 0.02);
+      border: 1px solid rgba(0, 245, 255, 0.1);
+    }
+
+    .control-keys {
+      display: flex;
+      gap: 4px;
+      direction: ltr;
+    }
+
+    .key-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      background: rgba(0, 245, 255, 0.12);
+      border: 1px solid var(--cyan);
+      color: var(--white);
+      border-radius: 3px;
+    }
+
+    .control-label {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(232, 244, 248, 0.75);
+    }
+
+    /* MORE GAMES TILES (MATCHING JOB HUNT HERO) */
+    .more-game-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid rgba(0, 255, 136, 0.15);
+      background: rgba(0, 255, 136, 0.02);
+      transition: all 0.3s;
+      cursor: none;
+      text-decoration: none;
+    }
+
+    .more-game-card:hover {
+      border-color: rgba(0, 255, 136, 0.4);
+      background: rgba(0, 255, 136, 0.05);
+      transform: translateX(-4px);
+    }
+
+    .more-game-card.coming-soon {
+      opacity: 0.5;
+      border-style: dashed;
+      pointer-events: none;
+    }
+
+    .mg-plus {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: rgba(0, 255, 136, 0.4);
+      border: 1px dashed rgba(0, 255, 136, 0.2);
+      flex-shrink: 0;
+    }
+
+    .mg-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .mg-title {
+      font-family: 'Share Tech Mono', 'Heebo', monospace;
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .mg-status {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      font-size: 0.7rem;
+      color: var(--dim);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .mg-status.active {
+      color: var(--cyan);
+      text-shadow: 0 0 5px var(--cyan);
+    }
+
+    .mg-game-description {
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.75rem;
+      color: var(--white);
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    /* CENTER GAME CABINET */
+    .game-cabinet {
+      width: 480px;
+      max-width: 100%;
+      background: rgba(2, 10, 15, 0.9);
+      border: 1px solid var(--border);
+      box-shadow: 0 0 40px rgba(0, 245, 255, 0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .game-cabinet:hover {
+      border-color: rgba(0, 245, 255, 0.35);
+      box-shadow: 0 0 50px rgba(0, 245, 255, 0.18);
+    }
+
+    .cabinet-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(0, 245, 255, 0.04);
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .cabinet-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.85);
+      }
+    }
+
+    .cabinet-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+    }
+
+    .cabinet-btn {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      background: rgba(0, 245, 255, 0.06);
+      border: 1px solid rgba(0, 245, 255, 0.25);
+      color: var(--white);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cabinet-btn:hover {
+      background: rgba(0, 245, 255, 0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 245, 255, 0.25);
+    }
+
+    /* IFRAME WRAPPER (STANDARD 480:270 CONTAINER) */
+    .iframe-viewport {
+      position: relative;
+      width: 480px;
+      height: 270px;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+      direction: ltr;
+    }
+
+    .iframe-viewport:fullscreen {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+    }
+
+    .iframe-viewport:-webkit-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+    }
+
+    /* VIRTUAL FHD (1920x1080) DESKTOP RENDERING */
+    .game-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1920px;
+      height: 1080px;
+      border: none;
+      display: block;
+      background: #000;
+      transform-origin: top left;
+      transform: scale(0.25);
+    }
+
+    .iframe-viewport:fullscreen .game-iframe,
+    .iframe-viewport:-webkit-full-screen .game-iframe {
+      width: 100% !important;
+      height: 100% !important;
+      transform: none !important;
+      position: relative !important;
+    }
+
+    /* LOADING SPINNER */
+    .media-loader {
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .media-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-spinner {
+      width: 48px;
+      height: 48px;
+      border: 2px solid rgba(0, 245, 255, 0.15);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-text {
+      margin-top: 16px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 30px 10vw;
+      border-top: 1px solid rgba(0, 245, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      margin-top: 60px;
+      background: rgba(2, 10, 15, 0.6);
+      width: 100%;
+    }
+
+    .footer-copy {
+      font-family: 'Heebo', 'Share Tech Mono', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(74, 122, 138, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      color: rgba(0, 245, 255, 0.2);
+      letter-spacing: 4px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 1200px) {
+      .game-content-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "cabinet cabinet"
+          "left right";
+        gap: 24px;
+        max-width: 1000px;
+        padding: 0 4vw;
+      }
+
+      .game-cabinet {
+        grid-area: cabinet;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .iframe-viewport {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+      }
+
+      .left-panel {
+        grid-area: left;
+        width: 100%;
+      }
+
+      .right-panel {
+        grid-area: right;
+        width: 100%;
+      }
+    }
+
+    /* Hide custom cursor on all mobile / touch / landscape-phone viewports */
+    @media (max-width: 768px),
+    (max-height: 550px),
+    (hover: none),
+    (pointer: coarse) {
+
+      .cursor,
+      .cursor-ring {
+        display: none !important;
+      }
+
+      body {
+        cursor: auto !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .game-content-row {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "cabinet"
+          "left"
+          "right";
+        padding: 0 4vw;
+      }
+
+      nav {
+        padding: 12px 6vw;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav-brand {
+        gap: 10px;
+      }
+
+      .nav-socials {
+        gap: 6px;
+      }
+
+      .nav-social-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+      }
+
+      .nav-social-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .nav-actions {
+        gap: 14px;
+      }
+
+      .lang-switch {
+        padding: 2px 4px;
+        font-size: 0.7rem;
+      }
+
+      .lang-btn {
+        padding: 2px 6px;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 499;
+        margin: 0;
+        background: rgba(2, 10, 15, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: 24px;
+        padding: 30px 24px;
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+        pointer-events: none;
+        transition: clip-path 0.4s ease, opacity 0.3s ease;
+      }
+
+      .nav-links.active {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links li {
+        transform: translateY(-16px);
+        transition: transform 0.4s ease;
+      }
+
+      .nav-links.active li {
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        font-size: 0.95rem;
+      }
+
+      .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translateY(9px);
+      }
+
+      .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-9px);
+      }
+
+      .game-wrapper-section {
+        padding-top: 80px;
+      }
+
+      .cabinet-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .cabinet-controls {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background grid -->
+  <div class="grid-bg"></div>
+
+  <!-- Custom cursors -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-brand">
+      <a href="../../../he/" class="nav-logo">SE</a>
+      <div class="nav-socials">
+        <a href="http://github.com/SagiEv/" target="_blank" rel="noopener noreferrer" class="nav-social-btn"
+          title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/sagi-evroni" target="_blank" rel="noopener noreferrer" class="nav-social-btn"
+          title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74v-8.37H5.06v8.37h2.8z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../../../he/#projects">פרויקטים</a></li>
+      <li><a href="../../../he/#games" class="active">משחקים</a></li>
+      <li><a href="../../../he/#automation">אוטומציה</a></li>
+      <li><a href="../../../he/#explorations">מחקר ופיתוח</a></li>
+      <li><a href="../../../he/#contact">צור קשר</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switch" id="langSwitch" aria-label="בורר שפה">
+        <a href="../index.html" class="lang-btn" data-lang="en">EN</a>
+        <span class="lang-divider">/</span>
+        <a href="index.html" class="lang-btn active" data-lang="he">עב</a>
+      </div>
+      <div class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Game Section -->
+  <section class="game-wrapper-section">
+    <div class="game-header">
+      <h1 class="game-title">GRAND THEFT ANIMAL</h1>
+      <p class="game-desc">// התחמק מהחוק · עקוף מכשולים · שרוד בג'ונגל //</p>
+    </div>
+
+    <div class="game-content-row" id="gameContentRow">
+      <!-- Arcade Switcher -->
+      <div class="side-panel left-panel">
+        <div class="dev-title" style="margin-bottom: 4px;">// משחקי ארקייד</div>
+
+        <!-- Grand Theft Animal (Current) -->
+        <a href="index.html" class="more-game-card">
+          <div
+            style="background: url('../apple-touch-icon.png') center/cover; width: 48px; height: 48px; border: 1px solid var(--cyan); border-radius: 4px; flex-shrink: 0;">
+          </div>
+          <div class="mg-info">
+            <div class="mg-title">GRAND THEFT ANIMAL</div>
+            <div class="mg-status active">משחק כעת</div>
+            <div class="mg-game-description">משחק ריצה ואקשן בסגנון GTA. התחמקו מהחוק ושרדו ברחובות!</div>
+          </div>
+        </a>
+
+        <!-- Job Hunt Hero -->
+        <a href="../../job-hunt-hero/he/index.html" class="more-game-card">
+          <div
+            style="background: url('../../job-hunt-hero/assets/game-banner.png') center/cover; width: 48px; height: 48px; border: 1px solid var(--cyan); border-radius: 4px; flex-shrink: 0;">
+          </div>
+          <div class="mg-info">
+            <div class="mg-title">JOB HUNT HERO</div>
+            <div class="mg-status" style="color: var(--green);">זמין כעת</div>
+            <div class="mg-game-description">עזרו לשגיא להתקבל לעבודה! ירו והתאימו את קורות החיים למשרות הנכונות לפני
+              שהן יציפו אתכם.</div>
+          </div>
+        </a>
+
+        <!-- Locked Slot -->
+        <div class="more-game-card coming-soon">
+          <div class="mg-plus">+</div>
+          <div class="mg-info">
+            <div class="mg-title">חריץ נעול</div>
+            <div class="mg-status">בקרוב</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Game Cabinet (Center) -->
+      <div class="game-cabinet" id="gameCabinet">
+        <div class="cabinet-topbar">
+          <div class="cabinet-status">
+            <span class="status-dot"></span>
+          </div>
+          <div class="cabinet-controls">
+            <button class="cabinet-btn" id="btnTheater" title="מצב תיאטרון">🗖 מצב תיאטרון</button>
+            <button class="cabinet-btn" id="btnRestart" title="אתחול משחק">↻ אתחול</button>
+            <button class="cabinet-btn" id="btnFullscreen" title="מסך מלא">⛶ מסך מלא</button>
+            <a href="https://grand-theft-animal.vercel.app/" target="_blank" rel="noopener noreferrer"
+              class="cabinet-btn" title="פתח בחלון חדש">↗ חלון חדש</a>
+          </div>
+        </div>
+
+        <div class="iframe-viewport" id="iframeViewport" dir="ltr">
+          <!-- Loading Overlay -->
+          <div class="media-loader" id="gameLoader">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <div class="loader-spinner"></div>
+              <div class="loader-text">CONNECTING TO GAME SERVER...</div>
+            </div>
+          </div>
+
+          <iframe id="gameIframe" class="game-iframe" src="https://grand-theft-animal.vercel.app/"
+            title="Grand Theft Animal" allow="autoplay; fullscreen; gamepad; focus-without-user-activation *"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Development Logic Panel -->
+      <div class="side-panel right-panel" id="dev-info-panel">
+        <div class="dev-title">// יומן פיתוח</div>
+        <p class="dev-desc">
+          משחק ריצה תלת-ממדי עתיר אדרנלין בהשראת GTA שנבנה לדפדפנים מודרניים. נווטו בתנועה דינמית מרובת נתיבים, התחמקו
+          מרודפים בלתי פוסקים ותזמנו כל תנועה בדיוק של שבריר שנייה.
+        </p>
+
+        <div class="dev-subtitle">איך משחקים</div>
+        <div class="controls-grid">
+          <div class="control-item">
+            <div class="control-keys">
+              <span class="key-badge">A</span>
+              <span class="key-badge">D</span>
+              <span class="key-badge">←</span>
+              <span class="key-badge">→</span>
+            </div>
+            <span class="control-label">מעבר נתיבים</span>
+          </div>
+          <div class="control-item">
+            <div class="control-keys">
+              <span class="key-badge">W</span>
+              <span class="key-badge">↑</span>
+            </div>
+            <span class="control-label">קפיצה</span>
+          </div>
+          <div class="control-item">
+            <div class="control-keys">
+              <span class="key-badge">S</span>
+              <span class="key-badge">↓</span>
+            </div>
+            <span class="control-label">החלקה</span>
+          </div>
+        </div>
+
+        <div class="dev-subtitle">טכנולוגיות</div>
+        <div class="dev-tags">
+          <span class="dev-tag">HTML5 Canvas</span>
+          <span class="dev-tag">TypeScript</span>
+          <span class="dev-tag">Vite</span>
+          <span class="dev-tag">Web Audio API</span>
+          <span class="dev-tag">Vercel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-copy">© 2026 שגיא עברוני — כל המערכות פעילות</div>
+    <div class="footer-logo">SE_v1.0</div>
+  </footer>
+
+  <script>
+    // CURSOR LOGIC
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+    });
+
+    function animCursor() {
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+
+    // HIDE CURSOR OVER GAME AREA
+    const cabinet = document.getElementById('gameCabinet');
+    cabinet.addEventListener('mouseenter', () => {
+      cursor.style.display = 'none';
+      ring.style.display = 'none';
+    });
+    cabinet.addEventListener('mouseleave', () => {
+      cursor.style.display = 'block';
+      ring.style.display = 'block';
+    });
+
+    // LOADER DISMISS
+    const gameIframe = document.getElementById('gameIframe');
+    const gameLoader = document.getElementById('gameLoader');
+
+    function hideLoader() {
+      if (gameLoader) {
+        gameLoader.classList.add('hidden');
+        setTimeout(() => gameLoader.remove(), 600);
+      }
+    }
+
+    gameIframe.addEventListener('load', () => {
+      scaleGameViewport();
+      setTimeout(hideLoader, 400);
+    });
+
+    // Fallback: dismiss loader after 5s max
+    setTimeout(hideLoader, 5000);
+
+    // RESTART BUTTON
+    const btnRestart = document.getElementById('btnRestart');
+    btnRestart.addEventListener('click', () => {
+      gameIframe.src = gameIframe.src;
+    });
+
+    // FULLSCREEN TOGGLE
+    const btnFullscreen = document.getElementById('btnFullscreen');
+    const iframeViewport = document.getElementById('iframeViewport');
+
+    btnFullscreen.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        if (iframeViewport.requestFullscreen) {
+          iframeViewport.requestFullscreen();
+        } else if (iframeViewport.webkitRequestFullscreen) {
+          iframeViewport.webkitRequestFullscreen();
+        } else if (iframeViewport.msRequestFullscreen) {
+          iframeViewport.msRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+
+    // THEATER MODE TOGGLE & FHD AUTO-SCALING
+    const btnTheater = document.getElementById('btnTheater');
+    const contentRow = document.getElementById('gameContentRow');
+    const BASE_FHD_WIDTH = 1920;
+    const BASE_FHD_HEIGHT = 1080;
+
+    function scaleGameViewport() {
+      if (!iframeViewport || !gameIframe) return;
+
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+        gameIframe.style.width = '100%';
+        gameIframe.style.height = '100%';
+        gameIframe.style.transform = 'none';
+        gameIframe.style.position = 'relative';
+        return;
+      }
+
+      const currentW = iframeViewport.clientWidth;
+      gameIframe.style.position = 'absolute';
+      gameIframe.style.width = BASE_FHD_WIDTH + 'px';
+      gameIframe.style.height = BASE_FHD_HEIGHT + 'px';
+
+      const scale = currentW / BASE_FHD_WIDTH;
+      gameIframe.style.transform = `scale(${scale})`;
+      gameIframe.style.transformOrigin = 'top left';
+    }
+
+    window.addEventListener('resize', scaleGameViewport);
+    document.addEventListener('fullscreenchange', scaleGameViewport);
+    document.addEventListener('webkitfullscreenchange', scaleGameViewport);
+
+    btnTheater.addEventListener('click', () => {
+      contentRow.classList.toggle('theater-mode');
+      const isTheater = contentRow.classList.contains('theater-mode');
+      btnTheater.innerHTML = isTheater ? '🗗 מצב רגיל' : '🗖 מצב תיאטרון';
+      setTimeout(scaleGameViewport, 50);
+      setTimeout(scaleGameViewport, 320);
+    });
+
+    scaleGameViewport();
+
+    // Mobile Nav Toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth Language Switch Crossfade
+    (function initLangFade() {
+      const enLangBtn = document.querySelector('.lang-btn[data-lang="en"]');
+      const heLangBtn = document.querySelector('.lang-btn[data-lang="he"]');
+      const langSwitch = document.getElementById('langSwitch');
+      const isHebrew = document.documentElement.lang === 'he';
+      const targetBtn = isHebrew ? enLangBtn : heLangBtn;
+      const currentBtn = isHebrew ? heLangBtn : enLangBtn;
+      const targetLang = isHebrew ? 'en' : 'he';
+      let isSwitching = false;
+
+      if (sessionStorage.getItem('lang_fade') === 'true') {
+        sessionStorage.removeItem('lang_fade');
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('lang-fade-entering');
+          document.body.classList.add('lang-fade-in');
+          setTimeout(() => {
+            document.body.classList.remove('lang-fade-in');
+          }, 250);
+        });
+      } else {
+        document.documentElement.classList.remove('lang-fade-entering');
+      }
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+      }, 500);
+
+      if (targetBtn) {
+        targetBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (isSwitching) return;
+          isSwitching = true;
+
+          if (langSwitch) langSwitch.classList.add('switching');
+          if (currentBtn) currentBtn.classList.remove('active');
+          targetBtn.classList.add('active');
+
+          const targetUrl = targetBtn.href || (isHebrew ? '../index.html' : 'index.html');
+
+          sessionStorage.setItem('lang_fade', 'true');
+          try { localStorage.setItem('preferred_lang', targetLang); } catch (err) { }
+
+          document.body.classList.add('lang-fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 180);
+        });
+      }
+
+      window.addEventListener('pageshow', () => {
+        isSwitching = false;
+        sessionStorage.removeItem('lang_fade');
+        document.documentElement.classList.remove('lang-fade-entering');
+        document.body.classList.remove('lang-fade-out');
+        document.body.classList.remove('lang-fade-in');
+        if (langSwitch) langSwitch.classList.remove('switching');
+        if (currentBtn) currentBtn.classList.add('active');
+        if (targetBtn) targetBtn.classList.remove('active');
+      });
+    })();
+  </script>
+</body>
+
+</html>
